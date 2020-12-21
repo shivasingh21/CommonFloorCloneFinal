@@ -19,7 +19,7 @@ class PropertiesController < ApplicationController
   end
   def show
     @property = Property.find(params[:id])
-    @favourite_exists = Favourite.where(property: @property,user: current_user) == [] ? false : true
+    # @favourite_exists = Favourite.where(property: @property,user: current_user) == [] ? false : true
   end
 
   def edit
@@ -37,7 +37,7 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
-    @property.user = User.first
+    @property.user = current_user
     if @property.save
       redirect_to @property
     else
@@ -47,7 +47,8 @@ class PropertiesController < ApplicationController
 
   private
     def property_params
-      params.require(:property).permit(:PropertyType, :property_status, :address, :city, :Price, :Area, :OwnerName, :ContactPerson, :Number, :property_image)
+      params.require(:property).permit(:property_type, :property_status, :address, :city, :price, :area, :owner_name, :contact_person, :phone_number, :property_image)
     end
+
 
 end

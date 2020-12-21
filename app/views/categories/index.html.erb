@@ -1,0 +1,21 @@
+<table class="ui collapsing table">
+  <thead>
+    <tr>
+      <th ></th>
+      <th class="ten wide">Category</th>
+      <th class=""colspan="3">Links</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @category.each_with_index do |category,i| %>
+
+    <tr>
+      <td><%= i+1 %> .</td>
+      <td><%= category.name %></td>
+      <td><%= link_to 'Show', category_path(category) %></td>
+      <td><%= link_to 'Edit', edit_category_path(category) %></td>
+      <td><%= link_to 'Destroy', category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

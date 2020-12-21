@@ -1,0 +1,17 @@
+
+<h1 class="text-center" >Create Property</h1>
+<%= render 'shared/errors',obj: @category %>
+
+<%= form_with(model: @category, html: {class: "ui large form"}, local: true) do |form| %>
+  <h4 class="ui dividing header">Property Information</h4>
+    <div class="field">
+    <label> <%= form.label :name, "Contact Number" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :name,placeholder: "Categories", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit @category.new_record? ? 'SAVE' : 'UPDATE', class: "ui green button" %>
+<% end %>

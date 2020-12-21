@@ -31,6 +31,8 @@ gem 'jquery-rails'
 gem 'semantic-ui-sass'
 gem 'popper_js'
 gem 'tether-rails'
+gem 'hirb', '~> 0.7.3'
+gem 'faker'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

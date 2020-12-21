@@ -3,8 +3,8 @@
   <h4 class="ui dividing header">Property Information</h4>
   <div class="two fields">
     <div class="field">
-      <%= form.label :PropertyType, "Property Type" %>
-      <%= form.select :PropertyType, options_from_collection_for_select(Category.all, :name, :name, form.object.PropertyType), :prompt => 'Property Type',class: "ui fluid dropdown" %>
+      <%= form.label :property_type, "Property Type" %>
+      <%= form.select :property_type, options_from_collection_for_select(Category.all, :name, :name, form.object.property_type), :prompt => 'Property Type',class: "ui fluid dropdown" %>
     </div>
     <div class="field">
       <%= form.label :property_status, "Property Status" %>
@@ -21,14 +21,6 @@
     </div>
   </div>
   <div class="field">
-    <label><%= form.label :OwnerName, "Owner Name" %></label>
-    <div class="fields">
-      <div class="twelve wide field">
-        <%= form.text_field :OwnerName, placeholder: "Owner Name", class: "border border-success" %>
-      </div>
-    </div>
-  </div>
-  <div class="field">
     <label><%= form.label :city, "City" %></label>
     <div class="fields">
       <div class="twelve wide field">
@@ -37,34 +29,43 @@
     </div>
   </div>
   <div class="field">
-    <label><%= form.label :Price, "Price" %></label>
+    <label><%= form.label :owner_name, "Owner Name" %></label>
     <div class="fields">
       <div class="twelve wide field">
-        <%= form.text_field :Price, placeholder: "Amount in INR (eg. 12000 )", class: "border border-success" %>
+        <%= form.text_field :owner_name, placeholder: "Owner Name", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label><%= form.label :price, "Price" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :price, placeholder: "Amount in INR (eg. 12000 )", class: "border border-success" %>
        </div>
     </div>
   </div>
   <div class="field">
-    <label> <%= form.label :Area, "Area" %></label>
+    <label> <%= form.label :area, "Area" %></label>
     <div class="fields">
       <div class="twelve wide field">
-        <%= form.text_field :Area, placeholder: "Area in sqft", class: "border border-success" %>
+        <%= form.text_field :area, placeholder: "Area in sqft", class: "border border-success" %>
       </div>
     </div>
   </div>
   <div class="field">
-    <label> <%= form.label :ContactPerson, "Contact Person" %></label>
+    <label> <%= form.label :contact_person, "Contact Person" %></label>
     <div class="fields">
       <div class="twelve wide field">
-         <%= form.text_field :ContactPerson,placeholder: "Contact Person", class: "border border-success" %>
+         <%= form.text_field :contact_person,placeholder: "Contact Person", class: "border border-success" %>
       </div>
     </div>
   </div>
   <div class="field">
-    <label> <%= form.label :Number, "Contact Number" %></label>
+    <label> <%= form.label :phone_number, "Contact Number" %></label>
     <div class="fields">
       <div class="twelve wide field">
-        <%= form.text_field :Number,placeholder: "Number without 0 or +91 (eg. 89xxxxxxxx )", class: "border border-success" %>
+        <%= form.text_field :phone_number,placeholder: "Number without 0 or +91 (eg. 89xxxxxxxx )", class: "border border-success" %>
       </div>
     </div>
   </div>

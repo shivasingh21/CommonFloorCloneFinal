@@ -1,37 +1,57 @@
 <h1 class="text-center">SHOW</h1>
 
-<% if @property.property_image.attached? %>
-  <%= image_tag(@property.property_image, width: 400, height: 400)%>
-<% end %>
-<table>
-  <thead>
-    <th>Property Type</th>
-    <th>Property Status</th>
-    <th>Address</th>
-    <th>City</th>
-    <th>Price</th>
-    <th>Area</th>
-    <th>Owner Name</th>
-    <th>Contact person</th>
-    <th>Number</th>
-    <th>Links</th>
-  </thead>
 
-  <tbody>
-    <tr>
-      <td><%= @property.PropertyType %></td>
-      <td><%= @property.property_status %></td>
-      <td><%= @property.address %></td>
-      <td><%= @property.city %></td>
-      <td><%= @property.Price %></td>
-      <td><%= @property.Area %></td>
-      <td><%= @property.OwnerName %></td>
-      <td><%= @property.ContactPerson %></td>
-      <td><%= @property.Number %></td>
-      <td><%= link_to 'Edit',edit_property_path(@property) %></td>
-    </tr>
-  </tbody>
-</table>
+<div class="card mb-3">
+  <% if @property.property_image.attached? %>
+    <%= image_tag(@property.property_image, style:"width:100%", height: 400,class: "card-img-top", alt: "No Image")%>
+  <% end %>
+  <div class="card-body">
+    <h5 class="card-title">Property Details</h5>
+    <p class="card-text"><small class="text-muted">Posted at <%= time_ago_in_words(@property.created_at)%></small></p>
+
+    <table class="table">
+      <tr>
+        <th scope="col">Property Type</th>
+        <td scope="row"><%= @property.property_type %></td>
+      </tr>
+      <tr>
+        <th scope="col">Property Status</th>
+        <td scope="row"><%= @property.property_status %></td>
+      </tr>
+      <tr>
+        <th scope="col">Address</th>
+        <td scope="row"><%= @property.address %></td>
+      </tr>
+      <tr>
+        <th scope="col">City</th>
+        <td scope="row"><%= @property.city %></td>
+      </tr>
+      <tr>
+        <th scope="col">Price</th>
+        <td scope="row"><%= @property.price %></td>
+      </tr>
+      <tr>
+        <th scope="col">Area</th>
+        <td scope="row"><%= @property.area %></td>
+      </tr>
+      <tr>
+        <th scope="col">Owner Name</th>
+        <td scope="row"><%= @property.owner_name %></td>
+      </tr>
+      <tr>
+        <th scope="col">Contact person</th>
+        <td scope="row"><%= @property.contact_person %></td>
+      </tr>
+      <tr>
+        <th scope="col">Phone Number</th>
+        <td scope="row"><%= @property.phone_number %></td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<% if false %>
 <%= link_to favourite_text, favourites_update_path(property: @property), id: 'favourite_link'%>
 <% if @favourite_exists == true %>
   <p>Favourite Exists</p>
@@ -61,4 +81,5 @@
   <p>
     <%= form.submit %>
   </p>
+<% end %>
 <% end %>

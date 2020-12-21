@@ -1,5 +1,7 @@
 <h1 class="text-center">HELLO, <%= @user.username %></h1>
 <h1>Favourite</h1>
+<% if false%>
 <% current_user.favourites.each do |favorite| %>
   <p><%= favorite.property.city %></p>
+<% end %>
 <% end %>
