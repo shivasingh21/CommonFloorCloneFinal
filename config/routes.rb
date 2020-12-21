@@ -12,6 +12,7 @@ Rails.application.routes.draw do
    member do
      get :approve
    end
+   post 'comments', to: 'comments#create'
    # collection do
    #   patch 'approve'
    # end

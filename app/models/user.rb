@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :properties, dependent: :destroy
   # has_many :reviews, dependent: :destroy
   # has_many :favourites
-
+  has_many :comments, dependent: :destroy
   after_validation { self.email = self.email.downcase }
 
   validates :username, presence: true, length: { maximum: 25 }, uniqueness: { case_sensetive: false }

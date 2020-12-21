@@ -1,4 +1,6 @@
 class PropertiesController < ApplicationController
+  before_action :set_property, only: [:show, :edit, :update, :destroy]
+
   def index
     if admin?
       @property = Property.where(approved_status: 'false').order('created_at DESC')
@@ -10,6 +12,7 @@ class PropertiesController < ApplicationController
   def new
     @property = Property.new
   end
+
   def approve
     @property = Property.find(params[:id])
     if @property.update(approved_status: "true")
@@ -18,16 +21,16 @@ class PropertiesController < ApplicationController
     end
   end
   def show
-    @property = Property.find(params[:id])
+    @comment = Comment.new
+    @comments = @property.comments.order("created_at DESC")
+
     # @favourite_exists = Favourite.where(property: @property,user: current_user) == [] ? false : true
   end
 
   def edit
-    @property = Property.find(params[:id])
   end
 
   def update
-    @property = Property.find(params[:id])
     if @property.update(property_params)
       redirect_to @property
     else
@@ -49,6 +52,8 @@ class PropertiesController < ApplicationController
     def property_params
       params.require(:property).permit(:property_type, :property_status, :address, :city, :price, :area, :owner_name, :contact_person, :phone_number, :property_image)
     end
-
+    def set_property
+      @property = Property.find(params[:id])
+    end
 
 end

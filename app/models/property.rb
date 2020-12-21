@@ -1,7 +1,7 @@
 class Property < ApplicationRecord
   belongs_to :user
   has_one_attached :property_image
-  has_many :reviews, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   after_validation { self.city = self.city.upcase }
 

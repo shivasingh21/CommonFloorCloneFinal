@@ -24,10 +24,12 @@
           <%= link_to "Show Details", property ,class: "text-white"%>
           <i class="right chevron icon"></i>
         </div>
-        <div class="ui right floated primary button">
-          <%= link_to "Approve", approve_property_path(property) ,class: "text-white"%>
-          <i class="right chevron icon"></i>
-        </div>
+        <% if admin? %>
+          <div class="ui right floated primary button">
+            <%= link_to "Approve", approve_property_path(property) ,class: "text-white"%>
+            <i class="right chevron icon"></i>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>
