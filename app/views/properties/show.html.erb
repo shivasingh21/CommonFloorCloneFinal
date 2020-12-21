@@ -1,0 +1,64 @@
+<h1 class="text-center">SHOW</h1>
+
+<% if @property.property_image.attached? %>
+  <%= image_tag(@property.property_image, width: 400, height: 400)%>
+<% end %>
+<table>
+  <thead>
+    <th>Property Type</th>
+    <th>Property Status</th>
+    <th>Address</th>
+    <th>City</th>
+    <th>Price</th>
+    <th>Area</th>
+    <th>Owner Name</th>
+    <th>Contact person</th>
+    <th>Number</th>
+    <th>Links</th>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td><%= @property.PropertyType %></td>
+      <td><%= @property.property_status %></td>
+      <td><%= @property.address %></td>
+      <td><%= @property.city %></td>
+      <td><%= @property.Price %></td>
+      <td><%= @property.Area %></td>
+      <td><%= @property.OwnerName %></td>
+      <td><%= @property.ContactPerson %></td>
+      <td><%= @property.Number %></td>
+      <td><%= link_to 'Edit',edit_property_path(@property) %></td>
+    </tr>
+  </tbody>
+</table>
+<%= link_to favourite_text, favourites_update_path(property: @property), id: 'favourite_link'%>
+<% if @favourite_exists == true %>
+  <p>Favourite Exists</p>
+<% end %>
+<h2>Reviews</h2>
+<% @property.reviews.each do |review| %>
+  <p>
+    <strong>Ratings:</strong>
+    <%= review.rating %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= review.comment %>
+  </p>
+<% end %>
+<h2>Add a comment:</h2>
+<%= form_with model: [ @property, @property.reviews.build ], local: true do |form| %>
+  <p>
+    <%= form.label :rating %><br>
+    <%= form.text_field :rating %>
+  </p>
+  <p>
+    <%= form.label :comment %><br>
+    <%= form.text_area :comment %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

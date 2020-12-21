@@ -1,0 +1,33 @@
+
+<div class="ui placeholder segment">
+  <div class="ui two column very relaxed stackable grid">
+    <div class="column">
+      <%= form_with(scope: :session, html: {class: "ui form"},url: login_path, local: true) do |form| %>
+        <div class="field">
+          <%= form.label :email, "Email"%>
+          <div class="ui left icon input">
+            <%= form.text_field :email, placeholder: "Email", class: "border border-success"%>
+            <i class="user icon"></i>
+          </div>
+        </div>
+        <div class="field">
+          <%= form.label :password, "Password"%>
+          <div class="ui left icon input">
+            <%=form.password_field :password, placeholder: "Password", class: "border border-success"%>
+            <i class="user icon"></i>
+          </div>
+        </div>
+        <%=form.submit "Login",class: "ui green submit button"%>
+      <% end %>
+    </div>
+    <div class="middle aligned column">
+      <div class="ui big button green">
+        <i class="signup icon"></i>
+        <%= link_to 'Sign Up', signup_path, class: "text-white"%>
+      </div>
+    </div>
+  </div>
+  <div class="ui vertical divider">
+    Or
+  </div>
+</div>

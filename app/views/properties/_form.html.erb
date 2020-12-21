@@ -1,0 +1,77 @@
+
+<%= form_with(model: @property, html: {class: "ui large form"}, local: true) do |form| %>
+  <h4 class="ui dividing header">Property Information</h4>
+  <div class="two fields">
+    <div class="field">
+      <%= form.label :PropertyType, "Property Type" %>
+      <%= form.select :PropertyType, options_from_collection_for_select(Category.all, :name, :name, form.object.PropertyType), :prompt => 'Property Type',class: "ui fluid dropdown" %>
+    </div>
+    <div class="field">
+      <%= form.label :property_status, "Property Status" %>
+      <%= form.select :property_status, [ 'Rental', 'Sold', 'Sale' ], :prompt => 'Property Status',class: "ui fluid dropdown" %>
+    </div>
+  </div>
+
+  <div class="field">
+    <label> <%= form.label :address, "Address" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+         <%= form.text_field :address, placeholder: "Address", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label><%= form.label :OwnerName, "Owner Name" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :OwnerName, placeholder: "Owner Name", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label><%= form.label :city, "City" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+         <%= form.text_field :city, placeholder: "City", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label><%= form.label :Price, "Price" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :Price, placeholder: "Amount in INR (eg. 12000 )", class: "border border-success" %>
+       </div>
+    </div>
+  </div>
+  <div class="field">
+    <label> <%= form.label :Area, "Area" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :Area, placeholder: "Area in sqft", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label> <%= form.label :ContactPerson, "Contact Person" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+         <%= form.text_field :ContactPerson,placeholder: "Contact Person", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label> <%= form.label :Number, "Contact Number" %></label>
+    <div class="fields">
+      <div class="twelve wide field">
+        <%= form.text_field :Number,placeholder: "Number without 0 or +91 (eg. 89xxxxxxxx )", class: "border border-success" %>
+      </div>
+    </div>
+  </div>
+  <div class="field">
+    <label><%= form.label :property_image, "Property Image" %></label>
+    <%= form.file_field :property_image, class: "border border-success ui button" %>
+  </div>
+
+  <%= form.submit @property.new_record? ? 'SAVE' : 'UPDATE', class: "ui green button"%>
+<% end %>
