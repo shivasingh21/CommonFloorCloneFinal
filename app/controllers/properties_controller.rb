@@ -2,10 +2,12 @@ class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
   def index
+    @category = Category.all
     if admin?
       @property = Property.where(approved_status: 'false').order('created_at DESC')
     else
-      @property = Property.where(approved_status: 'true')
+      @property = Property.property_search(params)
+      # @property = Property.where(approved_status: 'true')
     end
   end
 
