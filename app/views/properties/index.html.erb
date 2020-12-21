@@ -8,9 +8,9 @@
       <% end %>
     </div>
     <div class="content">
-      <%= link_to property.PropertyType, property, class: "header" %>
+      <%= link_to property.property_type, property, class: "header" %>
       <div class="meta">
-        <span class="home">By <%= property.OwnerName %></span><br/>
+        <span class="home">By <%= property.owner_name %></span><br/>
         <span class="home">Posted <%= time_ago_in_words(property.created_at) %></span>
       </div>
       <div class="description">
@@ -18,7 +18,7 @@
       </div>
       <div class="extra">
         <div class="ui label"><i class="home icon"></i><%= property.property_status%></div>
-        <span class="home text-dark"><i class="rupee sign icon green"></i><%= property.Price%></span>
+        <span class="home text-dark"><i class="rupee sign icon green"></i><%= property.price%></span>
 
         <div class="ui right floated primary button">
           <%= link_to "Show Details", property ,class: "text-white"%>

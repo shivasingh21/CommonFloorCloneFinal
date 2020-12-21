@@ -33,6 +33,7 @@ gem 'popper_js'
 gem 'tether-rails'
 gem 'hirb', '~> 0.7.3'
 gem 'faker'
+gem 'rspec-rails'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
