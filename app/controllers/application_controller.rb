@@ -19,4 +19,23 @@ class ApplicationController < ActionController::Base
   def favorite_text
     return @favorite_exists ? "Unfavorite" : "Favorite"
   end
+
+  def authenticate_user
+    return if logged_in?
+
+    flash[:danger] = "Please login with your credential."
+    redirect_to login_path
+  end
+
+  def authenticate_admin
+    if logged_in?
+      return if admin?
+
+      flash[:danger] = "Access denied. You don't have admin access."
+      redirect_to root_path
+    else
+      flash[:danger] = "Please login with your credential."
+      redirect_to login_path
+    end
+  end
 end

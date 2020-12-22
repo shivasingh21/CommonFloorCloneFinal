@@ -7,7 +7,7 @@ class PropertiesController < ApplicationController
       @property = Property.where(approved_status: 'false').paginate(page: params[:page], per_page: 30).order('created_at DESC')
     else
       @property = Property.property_search(params).paginate(page: params[:page], per_page: 6)
-      # @property = Property.where(approved_status: 'true')
+      
     end
   end
 

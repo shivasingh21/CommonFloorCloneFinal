@@ -18,7 +18,7 @@ class Property < ApplicationRecord
   # validate :correct_property_image
 
   def self.property_search(search_params)
-    property = Property.where(approved_status: 'true')
+    property = Property.where(approved_status: 'true').order("created_at DESC")
     property = property.where(property_type: search_params[:property_type]) if search_params[:property_type].present?
     property = property.where(property_status: search_params[:property_status]) if search_params[:property_status].present?
     property = property.where(city: search_params[:city]) if search_params[:city].present?
