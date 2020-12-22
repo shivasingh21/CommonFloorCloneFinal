@@ -20,7 +20,10 @@ Rails.application.routes.draw do
    # resources :reviews
   end
   get 'favorites/update'
-  resources :categories, except: [:show]
+
+  namespace :admin do
+    resources :categories, except: [:show]
+  end
   # resources :categories, except: [:show]
 
 

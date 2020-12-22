@@ -20,9 +20,9 @@ class SessionsController < ApplicationController
     session[:omniauth] = auth.except('extra')
     user = User.sign_in_from_omniauth(auth)
     session[:user_id] = user.id
-    redirect_to root_url
+    redirect_to user
   end
-  
+
   def destroy
     session[:user_id] = nil
     session[:omniauth] = nil

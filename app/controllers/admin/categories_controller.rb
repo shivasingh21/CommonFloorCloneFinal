@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class Admin::CategoriesController < ApplicationController
   def index
     @category = Category.all
   end
@@ -12,7 +12,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
       flash[:notice] = "Category is Add Successfully"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       render 'new'
     end
@@ -22,7 +22,7 @@ class CategoriesController < ApplicationController
     if @category.update(category_params)
       flash[:notice] = "Category is Updated Successfully"
 
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       render 'edit'
     end
@@ -32,7 +32,7 @@ class CategoriesController < ApplicationController
     @category.destroy
     flash[:danger] = "Category is Deleted"
 
-    redirect_to categories_path
+    redirect_to admin_categories_path
   end
   private
   def category_params

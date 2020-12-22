@@ -22,13 +22,13 @@
       <% end %>
       <% if admin? %>
         <li class="nav-item active">
-          <%= link_to 'Approve Properties', new_category_path, class:'nav-link'%>
+          <%= link_to 'Approve Properties', new_admin_category_path, class:'nav-link'%>
         </li>
         <li class="nav-item active">
-          <%= link_to 'All categories', categories_path, class:'nav-link'%>
+          <%= link_to 'All categories', admin_categories_path, class:'nav-link'%>
         </li>
         <li class="nav-item active">
-          <%= link_to 'Add Category', new_category_path, class:'nav-link'%>
+          <%= link_to 'Add Category', new_admin_category_path, class:'nav-link'%>
         </li>
 
       <% end %>

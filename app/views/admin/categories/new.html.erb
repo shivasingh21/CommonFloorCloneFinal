@@ -2,7 +2,7 @@
 <h1 class="text-center" >Create Property</h1>
 <%= render 'shared/errors',obj: @category %>
 
-<%= form_with(model: @category, html: {class: "ui large form"}, local: true) do |form| %>
+<%= form_with(model: [:admin, @category], html: {class: "ui large form"}, local: true) do |form| %>
   <h4 class="ui dividing header">Property Information</h4>
     <div class="field">
     <label> <%= form.label :name, "Contact Number" %></label>
