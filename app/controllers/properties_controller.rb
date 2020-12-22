@@ -1,13 +1,12 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user, only: [:new, :edit, :destroy]
   def index
     @category = Category.all
     if admin?
-      @property = Property.where(approved_status: 'false').paginate(page: params[:page], per_page: 30).order('created_at DESC')
+      @property = Property.where(approved_status: 'false').paginate(page: params[:page], per_page: 6).order('created_at DESC')
     else
       @property = Property.property_search(params).paginate(page: params[:page], per_page: 6)
-      
     end
   end
 
@@ -23,8 +22,10 @@ class PropertiesController < ApplicationController
     end
   end
   def show
-    if current_user.id != @property.user.id
-      UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
+    if logged_in?
+      if current_user.id != @property.user.id
+        UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
+      end
     end
 
     @comment = Comment.new

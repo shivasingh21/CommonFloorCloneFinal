@@ -51,15 +51,17 @@
     </table>
   </div>
 </div>
-<% if current_user.id == @property.user.id %>
-<div class="ui primary button">
-  <%= link_to "Edit Details", edit_property_path(@property) ,class: "text-white"%>
-  <i class="pl-1 check icon"></i>
-</div>
-<div class="ui primary button">
-  <%= link_to 'Delete Property', property_path(@property), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-white" %>
-  <i class="pl-1 check icon"></i>
-</div>
+<% if logged_in? %>
+  <% if current_user.id == @property.user.id %>
+  <div class="ui primary button">
+    <%= link_to "Edit Details", edit_property_path(@property) ,class: "text-white"%>
+    <i class="pl-1 check icon"></i>
+  </div>
+  <div class="ui primary button">
+    <%= link_to 'Delete Property', property_path(@property), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-white" %>
+    <i class="pl-1 check icon"></i>
+  </div>
+  <% end %>
 <% end %>
 <% if admin? && !@property.approved_status %>
   <hr>
@@ -78,6 +80,7 @@
   Share Property Details:<%= social_share_button_tag(@property.property_type) %>
   <hr>
 <% end %>
+<% if logged_in? %>
 <%= form_with model: [@property, @comment] do |form| %>
   <div class="two fields">
     <div class="field">
@@ -91,7 +94,8 @@
   </div>
   <%= form.submit "Comment", class: "ui green button"%>
 <% end %>
-
+<% end %>
+<% if @comments.present? %>
 <div class="ui threaded comments pb-3">
   <h3 class="ui dividing header">Comments</h3>
   <% @comments.each do |comment|%>
@@ -110,4 +114,8 @@
       </div>
     </div>
   <% end %>
+
 </div>
+<% else %>
+<p>No Comments</p>
+<% end %>

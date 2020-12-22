@@ -10,19 +10,30 @@ require 'faker'
 #   User.create(username: Faker::Name.unique.name, email: Faker::Internet.email , password: "password")
 # end
 
+User.create(username: 'admin',email: 'admin@commonfloor.com',password: "password",admin: true)
+
+User.create(username: 'shiva',email: 'shiva@email.com',password: "password")
+User.create(username: 'raja',email: 'raja@email.com',password: "password")
+User.create(username: 'rahul',email: 'rahul@email.com',password: "password")
+
+Categories.create(name: 'Apartment')
+Categories.create(name: 'House')
+Categories.create(name: 'Villa')
+
 3.times do
   property = Property.new
   property.property_type = "Apartment"
   property.property_status = "Rental"
   property.address = Faker::Address.full_address
-  property.city = "kolkata"
+  property.city = "Kolkata"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
   property.area = Faker::Number.between(from: 500, to: 2000)
   property.owner_name = Faker::Name.unique.name
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
-  property.user = User.find(Faker::Number.between(from: 2, to: 6))
+  property.user = User.find(Faker::Number.between(from: 2, to: 4))
   property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_status = true
   property.save!
 end
 3.times do
@@ -30,13 +41,13 @@ end
   property.property_type = "Apartment"
   property.property_status = "Sold"
   property.address = Faker::Address.full_address
-  property.city = "kolkata"
+  property.city = "Bhopal"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
   property.area = Faker::Number.between(from: 500, to: 2000)
   property.owner_name = Faker::Name.unique.name
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
-  property.user = User.find(Faker::Number.between(from: 2, to: 6))
+  property.user = User.find(Faker::Number.between(from: 2, to: 4))
   property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
   property.save!
 end
@@ -45,14 +56,15 @@ end
   property.property_type = "Villa"
   property.property_status = "Sold"
   property.address = Faker::Address.full_address
-  property.city = "kolkata"
+  property.city = "Kolkata"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
   property.area = Faker::Number.between(from: 500, to: 2000)
   property.owner_name = Faker::Name.unique.name
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
-  property.user = User.find(Faker::Number.between(from: 2, to: 6))
+  property.user = User.find(Faker::Number.between(from: 2, to: 4))
   property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_status = true
   property.save!
 end
 3.times do
@@ -60,13 +72,29 @@ end
   property.property_type = "House"
   property.property_status = "Sold"
   property.address = Faker::Address.full_address
-  property.city = "kolkata"
+  property.city = "Bhopal"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
   property.area = Faker::Number.between(from: 500, to: 2000)
   property.owner_name = Faker::Name.unique.name
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
-  property.user = User.find(Faker::Number.between(from: 2, to: 6))
+  property.user = User.find(Faker::Number.between(from: 2, to: 4))
+  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_status = true
+  property.save!
+end
+3.times do
+  property = Property.new
+  property.property_type = "House"
+  property.property_status = "Rental"
+  property.address = Faker::Address.full_address
+  property.city = "Kolkata"
+  property.price = Faker::Number.between(from: 10000, to: 10000000)
+  property.area = Faker::Number.between(from: 500, to: 2000)
+  property.owner_name = Faker::Name.unique.name
+  property.contact_person = Faker::Name.unique.name
+  property.phone_number = Faker::Number.number(digits: 10)
+  property.user = User.find(Faker::Number.between(from: 2, to: 4))
   property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
   property.save!
 end
@@ -75,13 +103,14 @@ end
   property.property_type = "House"
   property.property_status = "Rental"
   property.address = Faker::Address.full_address
-  property.city = "kolkata"
+  property.city = "Bhopal"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
   property.area = Faker::Number.between(from: 500, to: 2000)
   property.owner_name = Faker::Name.unique.name
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
-  property.user = User.find(Faker::Number.between(from: 2, to: 6))
+  property.user = User.find(Faker::Number.between(from: 2, to: 4))
   property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_status = true
   property.save!
 end
