@@ -23,10 +23,10 @@ class PropertiesController < ApplicationController
     end
   end
   def show
-    # if current_user.id != @property.user.id
-    #   UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
-    # end
-    #
+    if current_user.id != @property.user.id
+      UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
+    end
+
     @comment = Comment.new
     @comments = @property.comments.order("created_at DESC")
 
