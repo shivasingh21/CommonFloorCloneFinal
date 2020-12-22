@@ -3,12 +3,15 @@
 <h1>Search by</h1>
 <%= form_tag(properties_path, method: "get") do  %>
   <%= select_tag "property_type", options_from_collection_for_select(@category, "name", "name"), include_blank: "All Property Type", class: "btn btn-success dropdown-toggle"%>
-  <%= select_tag "property_status", options_for_select(['rental', 'sold', 'buy' ]), include_blank: "All Property Status", class: "btn btn-success dropdown-toggle"%>
-  <%= select_tag "city", options_for_select( [  'bhopal', 'kolkata' ]), include_blank: "All Cities", class: "btn btn-success dropdown-toggle"%>
+  <%= select_tag "property_status", options_for_select([ 'Rental', 'Sold', 'Sale' ]), include_blank: "All Property Status", class: "btn btn-success dropdown-toggle"%>
+  <%= select_tag "city", options_for_select( [ 'Siliguri', 'Kolkata', 'Bhopal' ]), include_blank: "All Cities", class: "btn btn-success dropdown-toggle"%>
   <%= submit_tag "search" , class: "btn btn-success "%>
 <% end %>
 <hr>
 <% unless @property.empty? %>
+  <div class="flickr_pagination">
+    <%= will_paginate @property, :container => false %>
+  </div>
   <div class="ui divided items">
     <% @property.each do |property| %>
     <div class="item">
@@ -44,6 +47,7 @@
       </div>
     </div>
     <% end %>
+
 <% else %>
   <h1>No Result Found</h1>
 <% end %>

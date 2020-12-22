@@ -24,7 +24,7 @@
     <label><%= form.label :city, "City" %></label>
     <div class="fields">
       <div class="twelve wide field">
-         <%= form.text_field :city, placeholder: "City", class: "border border-success" %>
+         <%= form.select :property_status, [ 'Siliguri', 'Kolkata', 'Bhopal' ], :prompt => 'City',class: "ui fluid dropdown" %>
       </div>
     </div>
   </div>

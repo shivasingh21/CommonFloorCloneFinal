@@ -37,6 +37,7 @@ gem 'rspec-rails'
 gem 'social-share-button'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
+gem 'will_paginate'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

@@ -51,7 +51,16 @@
     </table>
   </div>
 </div>
-
+<% if current_user.id == @property.user.id %>
+<div class="ui primary button">
+  <%= link_to "Edit Details", edit_property_path(@property) ,class: "text-white"%>
+  <i class="pl-1 check icon"></i>
+</div>
+<div class="ui primary button">
+  <%= link_to 'Delete Property', property_path(@property), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-white" %>
+  <i class="pl-1 check icon"></i>
+</div>
+<% end %>
 <% if admin? && !@property.approved_status %>
   <hr>
   <div class="ui primary button">

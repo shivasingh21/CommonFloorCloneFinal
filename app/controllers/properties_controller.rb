@@ -4,9 +4,9 @@ class PropertiesController < ApplicationController
   def index
     @category = Category.all
     if admin?
-      @property = Property.where(approved_status: 'false').order('created_at DESC')
+      @property = Property.where(approved_status: 'false').paginate(page: params[:page], per_page: 30).order('created_at DESC')
     else
-      @property = Property.property_search(params)
+      @property = Property.property_search(params).paginate(page: params[:page], per_page: 6)
       # @property = Property.where(approved_status: 'true')
     end
   end
@@ -53,7 +53,13 @@ class PropertiesController < ApplicationController
       render 'new'
     end
   end
+  def destroy
+  @property = Property.find(params[:id])
+  @temp_user = @property.user
+  @property.destroy
 
+  redirect_to user_path(@temp_user)
+end
   private
     def property_params
       params.require(:property).permit(:property_type, :property_status, :address, :city, :price, :area, :owner_name, :contact_person, :phone_number, :property_image)
