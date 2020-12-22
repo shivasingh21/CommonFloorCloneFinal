@@ -34,6 +34,9 @@ gem 'tether-rails'
 gem 'hirb', '~> 0.7.3'
 gem 'faker'
 gem 'rspec-rails'
+gem 'social-share-button'
+gem 'omniauth-facebook'
+gem 'omniauth-google-oauth2'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

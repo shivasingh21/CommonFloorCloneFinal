@@ -59,7 +59,11 @@
     <i class="pl-1 check icon"></i>
   </div>
 <% end %>
-<hr>
+<% if logged_in? %>
+  <hr>
+  Share Property Details:<%= social_share_button_tag(@property.property_type) %>
+  <hr>
+<% end %>
 <%= form_with model: [@property, @comment] do |form| %>
   <div class="two fields">
     <div class="field">

@@ -19,3 +19,4 @@
 //= require tether
 //= require bootstrap
 //= require semantic-ui
+//= require social-share-button
