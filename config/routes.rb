@@ -10,15 +10,16 @@ Rails.application.routes.draw do
 
 
   resources :properties do
-   member do
-     get :approve
-   end
-   post 'comments', to: 'comments#create'
+    member do
+      get :approve
+    end
+    post 'comments', to: 'comments#create'
    # collection do
    #   patch 'approve'
    # end
    # resources :reviews
- end
+  end
+  get 'favorites/update'
   resources :categories, except: [:show]
   # resources :categories, except: [:show]
 

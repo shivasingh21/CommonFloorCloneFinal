@@ -61,6 +61,11 @@
 <% end %>
 <% if logged_in? %>
   <hr>
+  <div class="ui primary button ">
+    <%= link_to favorite_text, favorites_update_path(property: @property), id: 'favorite_link'%>
+    <i class="pl-1 heart icon"></i>
+  </div>
+  <br>
   Share Property Details:<%= social_share_button_tag(@property.property_type) %>
   <hr>
 <% end %>

@@ -23,14 +23,14 @@ class PropertiesController < ApplicationController
     end
   end
   def show
-    if current_user.id != @property.user.id
-      UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
-    end
-    
+    # if current_user.id != @property.user.id
+    #   UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
+    # end
+    #
     @comment = Comment.new
     @comments = @property.comments.order("created_at DESC")
 
-    # @favourite_exists = Favourite.where(property: @property,user: current_user) == [] ? false : true
+    @favorite_exists = Favorite.where(property: @property,user: current_user) == [] ? false : true
   end
 
   def edit

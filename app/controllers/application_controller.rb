@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :current_user, :logged_in?, :admin?, :favourite_text
+  helper_method :current_user, :logged_in?, :admin?, :favorite_text
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def favourite_text
-    return @favourite_exists ? "Unfavourite" : "Favourite"
+  def favorite_text
+    return @favorite_exists ? "Unfavorite" : "Favorite"
   end
 end
