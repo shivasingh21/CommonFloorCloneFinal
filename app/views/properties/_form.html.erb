@@ -24,7 +24,7 @@
     <label><%= form.label :city, "City" %></label>
     <div class="fields">
       <div class="twelve wide field">
-         <%= form.select :property_status, [ 'Siliguri', 'Kolkata', 'Bhopal' ], :prompt => 'City',class: "ui fluid dropdown" %>
+         <%= form.select :city, [ 'Siliguri', 'Kolkata', 'Bhopal' ], :prompt => 'City',class: "ui fluid dropdown" %>
       </div>
     </div>
   </div>
@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="field">
-    <label> <%= form.label :area, "Area" %></label>
+    <label> <%= form.label :area, "Area (in sqft)" %></label>
     <div class="fields">
       <div class="twelve wide field">
         <%= form.text_field :area, placeholder: "Area in sqft", class: "border border-success" %>

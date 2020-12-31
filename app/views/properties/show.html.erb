@@ -80,42 +80,49 @@
   Share Property Details:<%= social_share_button_tag(@property.property_type) %>
   <hr>
 <% end %>
+
+<% if current_user.id != @property.user.id %>
+  <% $redis.sadd redis_add_user_string(@property), redis_user_count_string(current_user) %>
+<% end %>
+  <h3> View Count: <%= $redis.scard redis_add_user_string(@property) %></h3>
+  <hr>
+
 <% if logged_in? %>
-<%= form_with model: [@property, @comment] do |form| %>
-  <div class="two fields">
-    <div class="field">
-      <%= form.label :rating, "Rating" %>
-      <%= form.text_field :rating, placeholder: " Rating between 0 to 5", class: "border border-success" %>
-    </div>
-    <div class="field">
-      <%= form.label :comment, "Comment" %>
-      <%= form.text_field :comment, placeholder: " Comment", class: "border border-success" %>
-    </div>
-  </div>
-  <%= form.submit "Comment", class: "ui green button"%>
-<% end %>
-<% end %>
-<% if @comments.present? %>
-<div class="ui threaded comments pb-3">
-  <h3 class="ui dividing header">Comments</h3>
-  <% @comments.each do |comment|%>
-    <div class="comment">
-      <div class="content">
-        <a class="author"><%= comment.user.username %></a>
-        <div class="metadata">
-          <span class="date"><%= comment.created_at.strftime("%I:%M %p") %> </span>
-        </div>
-        <div class="text">
-          <p>Comment:- <%= comment.comment %></p>
-        </div>
-        <div class="text">
-          <p>Rating:- <%= comment.rating %></p>
-        </div>
+  <%= form_with model: [@property, @comment] do |form| %>
+    <div class="two fields">
+      <div class="field">
+        <%= form.label :rating, "Rating" %>
+        <%= form.text_field :rating, placeholder: " Rating between 0 to 5", class: "border border-success" %>
+      </div>
+      <div class="field">
+        <%= form.label :comment, "Comment" %>
+        <%= form.text_field :comment, placeholder: " Comment", class: "border border-success" %>
       </div>
     </div>
+    <%= form.submit "Comment", class: "ui green button"%>
   <% end %>
+<% end %>
+<% if @comments.present? %>
+  <div class="ui threaded comments pb-3">
+    <h3 class="ui dividing header">Comments</h3>
+    <% @comments.each do |comment|%>
+      <div class="comment">
+        <div class="content">
+          <a class="author"><%= comment.user.username %></a>
+          <div class="metadata">
+            <span class="date"><%= comment.created_at.strftime("%I:%M %p") %> </span>
+          </div>
+          <div class="text">
+            <p>Comment:- <%= comment.comment %></p>
+          </div>
+          <div class="text">
+            <p>Rating:- <%= comment.rating %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
 
-</div>
+  </div>
 <% else %>
-<p>No Comments</p>
+  <p>No Comments</p>
 <% end %>

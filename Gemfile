@@ -38,6 +38,11 @@ gem 'social-share-button'
 gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem 'will_paginate'
+gem 'redis'
+gem 'redis-namespace'
+gem 'redis-rails'
+gem 'redis-rack-cache'
+gem 'active_storage_validations'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

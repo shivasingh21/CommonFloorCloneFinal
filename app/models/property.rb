@@ -15,7 +15,8 @@ class Property < ApplicationRecord
   validates :city, presence: true
   validates :property_status, presence: true
   validates :property_type, presence: true
-  # validate :correct_property_image
+  validates :property_image, attached: true,content_type: ['image/png', 'image/jpg', 'image/jpeg']
+
 
   def self.property_search(search_params)
     property = Property.where(approved_status: 'true').order("created_at DESC")
@@ -25,10 +26,4 @@ class Property < ApplicationRecord
     return property
   end
 
-  # def self.correct_property_image
-  #   if property_image.attached? && !property_image.content_type.in(%w(image/jpeg image/png))
-  #     errors.add(:property_image, 'Image must be a JPEG or PNG')
-  #     flash.now[:danger] = "Image must be a JPEG or PNG"
-  #   end
-  # end
 end

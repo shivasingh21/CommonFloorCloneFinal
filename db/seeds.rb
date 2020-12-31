@@ -20,7 +20,7 @@ Categories.create(name: 'Apartment')
 Categories.create(name: 'House')
 Categories.create(name: 'Villa')
 
-3.times do
+3.times do |i|
   property = Property.new
   property.property_type = "Apartment"
   property.property_status = "Rental"
@@ -32,11 +32,11 @@ Categories.create(name: 'Villa')
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
   property.user = User.find(Faker::Number.between(from: 2, to: 4))
-  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "#{i}_property_image.jpg")
   property.property_status = true
   property.save!
 end
-3.times do
+3.times do |i|
   property = Property.new
   property.property_type = "Apartment"
   property.property_status = "Sold"
@@ -48,10 +48,10 @@ end
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
   property.user = User.find(Faker::Number.between(from: 2, to: 4))
-  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "#{i}_property_image.jpg")
   property.save!
 end
-3.times do
+3.times do |i|
   property = Property.new
   property.property_type = "Villa"
   property.property_status = "Sold"
@@ -63,11 +63,11 @@ end
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
   property.user = User.find(Faker::Number.between(from: 2, to: 4))
-  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "#{i}_property_image.jpg")
   property.property_status = true
   property.save!
 end
-3.times do
+3.times do |i|
   property = Property.new
   property.property_type = "House"
   property.property_status = "Sold"
@@ -79,11 +79,11 @@ end
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
   property.user = User.find(Faker::Number.between(from: 2, to: 4))
-  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "#{i}_property_image.jpg")
   property.property_status = true
   property.save!
 end
-3.times do
+3.times do |i|
   property = Property.new
   property.property_type = "House"
   property.property_status = "Rental"
@@ -95,10 +95,10 @@ end
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
   property.user = User.find(Faker::Number.between(from: 2, to: 4))
-  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "#{i}_property_image.jpg")
   property.save!
 end
-3.times do
+3.times do |i|
   property = Property.new
   property.property_type = "House"
   property.property_status = "Rental"
@@ -110,7 +110,7 @@ end
   property.contact_person = Faker::Name.unique.name
   property.phone_number = Faker::Number.number(digits: 10)
   property.user = User.find(Faker::Number.between(from: 2, to: 4))
-  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "1_property_image.jpg")
+  property.property_image.attach(io: open("https://picsum.photos/1920/1080"), filename: "#{i}_property_image.jpg")
   property.property_status = true
   property.save!
 end

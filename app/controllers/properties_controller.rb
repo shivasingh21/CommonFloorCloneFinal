@@ -1,6 +1,8 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user, only: [:new, :edit, :destroy]
+  after_action :set_stop_mailer_flag, only: [:show]
+
   def index
     @category = Category.all
     if admin?
@@ -21,11 +23,13 @@ class PropertiesController < ApplicationController
       redirect_to properties_path
     end
   end
+
   def show
-    if logged_in?
-      if current_user.id != @property.user.id
-        UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
-      end
+    # $stop_mailer_flag variable is defined so that when show page is reloaded when comment or favorite action is performed in that case
+    # again mail is not send.
+
+    if ($stop_mailer_flag.nil? || $stop_mailer_flag) && (logged_in?) && (current_user.id != @property.user.id)
+      UserNotificationMailer.notification_mailer(current_user,@property.user).deliver
     end
 
     @comment = Comment.new
@@ -55,18 +59,23 @@ class PropertiesController < ApplicationController
     end
   end
   def destroy
-  @property = Property.find(params[:id])
-  @temp_user = @property.user
-  @property.destroy
+    @property = Property.find(params[:id])
+    @temp_user = @property.user
+    @property.destroy
 
-  redirect_to user_path(@temp_user)
-end
+    redirect_to user_path(@temp_user)
+  end
+
   private
     def property_params
       params.require(:property).permit(:property_type, :property_status, :address, :city, :price, :area, :owner_name, :contact_person, :phone_number, :property_image)
     end
+
     def set_property
       @property = Property.find(params[:id])
     end
 
+    def set_stop_mailer_flag
+      $stop_mailer_flag = true
+    end
 end

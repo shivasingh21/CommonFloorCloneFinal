@@ -20,6 +20,7 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
+
 <h1 class="text-center">Hand Picked Projects For You</h1>
 
 <div class="ui divided items">
@@ -50,6 +51,25 @@
     </div>
   </div>
 <% end %>
+<hr>
+<div class="text-center m-3">
+  <div class="ui huge statistic ">
+    <div class="value">
+      <i class="building icon"></i> <%= @property_count %>
+    </div>
+    <div class="label">
+      Properties Listed
+    </div>
+  </div>
+  <div class="ui huge statistic pl-3">
+    <div class="value">
+      <i class="users icon"></i> <%= @users_count %>
+    </div>
+    <div class="label">
+      Total Buyers/Sellers
+    </div>
+  </div>
+</div>
 <h1 class="text-center">Recently Added Products</h1>
 
 <div class="ui divided items">
