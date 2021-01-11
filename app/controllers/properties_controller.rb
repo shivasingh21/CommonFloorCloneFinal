@@ -7,9 +7,9 @@ class PropertiesController < ApplicationController
   def index
     @category = Category.all
     if admin?
-      @property = Property.property_search( params, admin: "true" ).paginate( page: params[:page], per_page: 6).order( "created_at DESC" )
+      @property = Property.admin_property_list(params)
     else
-      @property = Property.property_search( params, admin: "false" ).paginate( page: params[:page], per_page: 6 )
+      @property = Property.users_property_list(params)
     end
   end
 

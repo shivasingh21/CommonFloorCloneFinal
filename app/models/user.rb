@@ -27,4 +27,6 @@ class User < ApplicationRecord
     )
   end
 
+  scope :users_count, -> { where(admin: false ).count }
+
 end

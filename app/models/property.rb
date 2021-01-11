@@ -20,7 +20,7 @@ class Property < ApplicationRecord
 
 
   def self.property_search( search_params, admin )
-    if admin 
+    if admin
       property = Property.where( approved_status: "false").order("created_at DESC")
     else
       property = Property.where( approved_status: "true").order("created_at DESC")
@@ -31,5 +31,11 @@ class Property < ApplicationRecord
     property = property.where( city: search_params[ :city ] ) if search_params[ :city ].present?
     return property
   end
+
+  scope :top_picks, -> { where(approved_status: true).first(3) }
+  scope :most_recent, -> { where(approved_status: true).last(3) }
+
+  scope :users_property_list, -> (params) { property_search( params, admin = false ).paginate( page: params[:page], per_page: 6 ) }
+  scope :admin_property_list, -> (params) { property_search( params, admin = true ).paginate( page: params[:page], per_page: 5) }
 
 end

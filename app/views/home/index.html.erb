@@ -24,7 +24,7 @@
 <h1 class = " text-center ">Hand Picked Projects For You</h1>
 
 <div class = " ui divided items ">
-<% @property_first.each do |property| %>
+<% @property_top_picks.each do |property| %>
   <div class = " item ">
     <div class = " image ">
       <% if property.property_image.attached? %>
@@ -75,7 +75,7 @@
 <h1 class = " text-center ">Recently Added Products</h1>
 
 <div class = "ui divided items " >
-<% @property_last.each do |property| %>
+<% @property_most_recent.each do |property| %>
   <div class = " item ">
     <div class = "image ">
       <% if property.property_image.attached? %>
