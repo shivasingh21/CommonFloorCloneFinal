@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_22_075749) do
+ActiveRecord::Schema.define(version: 2021_01_11_203519) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -34,14 +34,14 @@ ActiveRecord::Schema.define(version: 2020_12_22_075749) do
   end
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.integer "rating"
-    t.string "comment"
+    t.integer "rating", null: false
+    t.string "comment", null: false
     t.bigint "user_id"
     t.bigint "property_id"
     t.datetime "created_at", null: false
@@ -60,15 +60,15 @@ ActiveRecord::Schema.define(version: 2020_12_22_075749) do
   end
 
   create_table "properties", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "property_type"
-    t.string "property_status"
-    t.string "address"
-    t.string "city"
-    t.integer "price"
-    t.float "area"
-    t.string "owner_name"
-    t.string "contact_person"
-    t.string "phone_number"
+    t.string "property_type", null: false
+    t.string "property_status", null: false
+    t.string "address", null: false
+    t.string "city", null: false
+    t.integer "price", null: false
+    t.float "area", null: false
+    t.string "owner_name", null: false
+    t.string "contact_person", null: false
+    t.string "phone_number", null: false
     t.boolean "approved_status", default: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(version: 2020_12_22_075749) do
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "provider"
     t.string "uid"
-    t.string "username"
-    t.string "email"
+    t.string "username", null: false
+    t.string "email", null: false
     t.string "password_digest"
     t.boolean "admin", default: false
     t.datetime "created_at", null: false
