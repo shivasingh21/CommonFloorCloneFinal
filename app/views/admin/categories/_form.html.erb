@@ -1,0 +1,14 @@
+
+<%= form_with( model: [:admin, @category], html: { class: " ui large form " }, local: true ) do |form| %>
+  <h4 class = " ui dividing header ">Property Information</h4>
+    <div class = " field ">
+    <label> <%= form.label :name, " Category Name " %></label>
+    <div class = " fields ">
+      <div class = " twelve wide field ">
+        <%= form.text_field :name, placeholder: " Categories ", class: " border border-success ", :required => true %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit @category.new_record? ? " SAVE " : " UPDATE ", class: " ui green button " %>
+<% end %>

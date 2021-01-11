@@ -1,80 +1,83 @@
-<h1 class="text-center">SHOW</h1>
+<h1 class = "text-center">SHOW</h1>
 
-<%= render 'shared/errors', obj: @comment %>
+<%= render "shared/errors", obj: @comment %>
 
-<div class="card mb-3">
+<div class = "card mb-3">
   <% if @property.property_image.attached? %>
     <%= image_tag(@property.property_image, style:"width:100%", height: 400,class: "card-img-top", alt: "No Image")%>
   <% end %>
-  <div class="card-body">
-    <h5 class="card-title">Property Details</h5>
-    <p class="card-text"><small class="text-muted">Posted at <%= time_ago_in_words(@property.created_at)%></small></p>
+  <div class = "card-body">
+    <h5 class = "card-title">Property Details</h5>
+    <p class = "card-text"><small class = "text-muted">Posted at <%= time_ago_in_words(@property.created_at)%></small></p>
 
-    <table class="table">
+    <table class = "table">
       <tr>
-        <th scope="col">Property Type</th>
-        <td scope="row"><%= @property.property_type %></td>
+        <th scope = "col">Property Type</th>
+        <td scope = "row"><%= @property.property_type %></td>
       </tr>
       <tr>
-        <th scope="col">Property Status</th>
-        <td scope="row"><%= @property.property_status %></td>
+        <th scope = "col">Property Status</th>
+        <td scope = "row"><%= @property.property_status %></td>
       </tr>
       <tr>
-        <th scope="col">Address</th>
-        <td scope="row"><%= @property.address %></td>
+        <th scope = "col">Address</th>
+        <td scope = "row"><%= @property.address %></td>
       </tr>
       <tr>
-        <th scope="col">City</th>
-        <td scope="row"><%= @property.city %></td>
+        <th scope = "col">City</th>
+        <td scope = "row"><%= @property.city %></td>
       </tr>
       <tr>
-        <th scope="col">Price</th>
-        <td scope="row"><%= @property.price %></td>
+        <th scope = "col">Price</th>
+        <td scope = "row"><%= @property.price %></td>
       </tr>
       <tr>
-        <th scope="col">Area</th>
-        <td scope="row"><%= @property.area %></td>
+        <th scope = "col">Area</th>
+        <td scope = "row"><%= @property.area %></td>
       </tr>
       <tr>
-        <th scope="col">Owner Name</th>
-        <td scope="row"><%= @property.owner_name %></td>
+        <th scope = "col">Owner Name</th>
+        <td scope = "row"><%= @property.owner_name %></td>
       </tr>
       <tr>
-        <th scope="col">Contact person</th>
-        <td scope="row"><%= @property.contact_person %></td>
+        <th scope = "col">Contact person</th>
+        <td scope = "row"><%= @property.contact_person %></td>
       </tr>
       <tr>
-        <th scope="col">Phone Number</th>
-        <td scope="row"><%= @property.phone_number %></td>
+        <th scope = "col">Phone Number</th>
+        <td scope = "row"><%= @property.phone_number %></td>
       </tr>
 
     </table>
   </div>
 </div>
+
 <% if logged_in? %>
   <% if current_user.id == @property.user.id %>
-  <div class="ui primary button">
-    <%= link_to "Edit Details", edit_property_path(@property) ,class: "text-white"%>
-    <i class="pl-1 check icon"></i>
-  </div>
-  <div class="ui primary button">
-    <%= link_to 'Delete Property', property_path(@property), method: :delete, data: { confirm: 'Are you sure?' }, class: "text-white" %>
-    <i class="pl-1 check icon"></i>
-  </div>
+    <div class = "ui primary button">
+      <%= link_to "Edit Details", edit_property_path(@property) ,class: "text-white"%>
+      <i class = "pl-1 check icon"></i>
+    </div>
+    <div class = "ui primary button">
+      <%= link_to "Delete Property", property_path(@property), method: :delete, data: { confirm: "Are you sure?" }, class: "text-white" %>
+      <i class = "pl-1 check icon"></i>
+    </div>
   <% end %>
 <% end %>
+
 <% if admin? && !@property.approved_status %>
   <hr>
-  <div class="ui primary button">
-    <%= link_to "Approve", approve_property_path(@property) ,class: "text-white"%>
-    <i class="pl-1 check icon"></i>
+  <div class = "ui primary button">
+    <%= link_to "Approve", approve_property_path(@property) ,class: "text-white", data: { confirm: "Are you sure you want to approve?" } %>
+    <i class = "pl-1 check icon"></i>
   </div>
 <% end %>
+
 <% if logged_in? %>
   <hr>
-  <div class="ui primary button ">
-    <%= link_to favorite_text, favorites_update_path(property: @property), id: 'favorite_link'%>
-    <i class="pl-1 heart icon"></i>
+  <div class = "ui primary button ">
+    <%= link_to favorite_text, favorites_update_path(property: @property), id: 'favorite_link', data: { confirm: "Are you sure you want to #{favorite_text_conformation} favorite list?" }%>
+    <i class = "pl-1 heart icon"></i>
   </div>
   <br>
   Share Property Details:<%= social_share_button_tag(@property.property_type) %>
@@ -84,17 +87,19 @@
 <% if current_user.id != @property.user.id %>
   <% $redis.sadd redis_add_user_string(@property), redis_user_count_string(current_user) %>
 <% end %>
-  <h3> View Count: <%= $redis.scard redis_add_user_string(@property) %></h3>
-  <hr>
+
+<h3> View Count: <%= $redis.scard redis_add_user_string(@property) %></h3>
+
+<hr>
 
 <% if logged_in? %>
   <%= form_with model: [@property, @comment] do |form| %>
-    <div class="two fields">
-      <div class="field">
+    <div class = "two fields">
+      <div class = "field">
         <%= form.label :rating, "Rating" %>
         <%= form.text_field :rating, placeholder: " Rating between 0 to 5", class: "border border-success" %>
       </div>
-      <div class="field">
+      <div class = "field">
         <%= form.label :comment, "Comment" %>
         <%= form.text_field :comment, placeholder: " Comment", class: "border border-success" %>
       </div>
@@ -102,20 +107,21 @@
     <%= form.submit "Comment", class: "ui green button"%>
   <% end %>
 <% end %>
+
 <% if @comments.present? %>
-  <div class="ui threaded comments pb-3">
-    <h3 class="ui dividing header">Comments</h3>
+  <div class = "ui threaded comments pb-3">
+    <h3 class = "ui dividing header">Comments</h3>
     <% @comments.each do |comment|%>
-      <div class="comment">
-        <div class="content">
-          <a class="author"><%= comment.user.username %></a>
-          <div class="metadata">
-            <span class="date"><%= comment.created_at.strftime("%I:%M %p") %> </span>
+      <div class = "comment">
+        <div class = "content">
+          <a class = "author"><%= comment.user.username %></a>
+          <div class = "metadata">
+            <span class = "date"><%= comment.created_at.strftime("%I:%M %p") %> </span>
           </div>
-          <div class="text">
+          <div class = "text">
             <p>Comment:- <%= comment.comment %></p>
           </div>
-          <div class="text">
+          <div class = "text">
             <p>Rating:- <%= comment.rating %></p>
           </div>
         </div>

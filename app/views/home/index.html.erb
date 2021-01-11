@@ -1,100 +1,102 @@
 
-<div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active" data-interval="3000">
-      <%= image_tag("carousel_image_1.jpg",height: "400px", class: "d-block w-100")%>
+<div id = " carouselExampleInterval " class = " carousel slide " data-ride = " carousel ">
+  <div class = " carousel-inner ">
+    <div class = " carousel-item active " data-interval = "3000">
+      <%= image_tag( "carousel_image_1.jpg", height: "400px", class: " d-block w-100 " ) %>
     </div>
-    <div class="carousel-item" data-interval="3000">
-      <%= image_tag("carousel_image_2.jpg",height: "400px", class: "d-block w-100")%>
+    <div class = " carousel-item " data-interval = "3000">
+      <%= image_tag( "carousel_image_2.jpg", height: "400px", class: " d-block w-100 " ) %>
     </div>
-    <div class="carousel-item" data-interval="3000">
-      <%= image_tag("carousel_image_3.jpg",height: "400px", class: "d-block w-100")%>
+    <div class = " carousel-item " data-interval = "3000" >
+      <%= image_tag( "carousel_image_3.jpg", height: "400px", class: " d-block w-100 " ) %>
     </div>
   </div>
-  <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
+  <a class = " carousel-control-prev " href = " #carouselExampleInterval " role = " button " data-slide = " prev ">
+    <span class = " carousel-control-prev-icon " aria-hidden = " true "></span>
+    <span class = " sr-only " >Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
+  <a class = " carousel-control-next " href = " #carouselExampleInterval " role = " button " data-slide = " next ">
+    <span class = " carousel-control-next-icon " aria-hidden = " true "></span>
+    <span class = " sr-only ">Next</span>
   </a>
 </div>
 
-<h1 class="text-center">Hand Picked Projects For You</h1>
+<h1 class = " text-center ">Hand Picked Projects For You</h1>
 
-<div class="ui divided items">
+<div class = " ui divided items ">
 <% @property_first.each do |property| %>
-  <div class="item">
-    <div class="image">
+  <div class = " item ">
+    <div class = " image ">
       <% if property.property_image.attached? %>
-        <%= image_tag(property.property_image)%>
+        <%= image_tag( property.property_image )%>
       <% end %>
     </div>
-    <div class="content">
-      <%= link_to property.property_type, property, class: "header" %>
-      <div class="meta">
-        <span class="home">By <%= property.owner_name %></span><br/>
-        <span class="home">Posted <%= time_ago_in_words(property.created_at) %></span>
+    <div class = " content ">
+      <%= link_to property.property_type, property, class: " header " %>
+      <div class = " meta ">
+        <span class = " home ">By <%= property.owner_name %></span><br/>
+        <span class = " home ">Posted <%= time_ago_in_words(property.created_at) %></span>
       </div>
-      <div class="description">
+      <div class = " description ">
         <p></p>
       </div>
-      <div class="extra">
-        <div class="ui label"><i class="home icon"></i><%= property.property_status%></div>
-        <span class="home text-dark"><i class="rupee sign icon green"></i><%= property.price%></span>
-        <div class="ui right floated primary button">
-          <%= link_to "Show Details", property ,class: "text-white"%>
-          <i class="right chevron icon"></i>
+      <div class = " extra ">
+        <div class = " ui label "><i class = " home icon "></i><%= property.property_status%></div>
+        <span class = " home text-dark "><i class = " rupee sign icon green "></i><%= property.price%></span>
+        <div class = " ui right floated primary button ">
+          <%= link_to "Show Details", property ,class: " text-white "%>
+          <i class = " right chevron icon "></i>
         </div>
       </div>
     </div>
   </div>
 <% end %>
+
 <hr>
-<div class="text-center m-3">
-  <div class="ui huge statistic ">
-    <div class="value">
-      <i class="building icon"></i> <%= @property_count %>
+
+<div class = " text-center m-3 ">
+  <div class = " ui huge statistic ">
+    <div class = " value ">
+      <i class = " building icon "></i> <%= @property_count %>
     </div>
-    <div class="label">
+    <div class = " label ">
       Properties Listed
     </div>
   </div>
-  <div class="ui huge statistic pl-3">
-    <div class="value">
-      <i class="users icon"></i> <%= @users_count %>
+  <div class = " ui huge statistic pl-3 ">
+    <div class = " value ">
+      <i class = " users icon "></i> <%= @users_count %>
     </div>
-    <div class="label">
+    <div class = " label ">
       Total Buyers/Sellers
     </div>
   </div>
 </div>
-<h1 class="text-center">Recently Added Products</h1>
+<h1 class = " text-center ">Recently Added Products</h1>
 
-<div class="ui divided items">
+<div class = "ui divided items " >
 <% @property_last.each do |property| %>
-  <div class="item">
-    <div class="image">
+  <div class = " item ">
+    <div class = "image ">
       <% if property.property_image.attached? %>
         <%= image_tag(property.property_image)%>
       <% end %>
     </div>
-    <div class="content">
-      <%= link_to property.property_type, property, class: "header" %>
-      <div class="meta">
-        <span class="home">By <%= property.owner_name %></span><br/>
-        <span class="home">Posted <%= time_ago_in_words(property.created_at) %></span>
+    <div class = " content ">
+      <%= link_to property.property_type, property, class: " header " %>
+      <div class = " meta ">
+        <span class = " home ">By <%= property.owner_name %></span><br/>
+        <span class = " home " >Posted <%= time_ago_in_words(property.created_at) %></span>
       </div>
-      <div class="description">
+      <div class = " description ">
         <p></p>
       </div>
-      <div class="extra">
-        <div class="ui label"><i class="home icon"></i><%= property.property_status%></div>
-        <span class="home text-dark"><i class="rupee sign icon green"></i><%= property.price%></span>
-        <div class="ui right floated primary button">
+      <div class = " extra ">
+        <div class = " ui label "><i class = " home icon "></i><%= property.property_status%></div>
+        <span class = " home text-dark "><i class =" rupee sign icon green "></i><%= property.price%></span>
+        <div class = " ui right floated primary button ">
           <%= link_to "Show Details", property ,class: "text-white"%>
-          <i class="right chevron icon"></i>
+          <i class = " right chevron icon "></i>
         </div>
       </div>
     </div>

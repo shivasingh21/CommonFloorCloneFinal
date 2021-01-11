@@ -10,15 +10,15 @@ require 'faker'
 #   User.create(username: Faker::Name.unique.name, email: Faker::Internet.email , password: "password")
 # end
 
-User.create(username: 'admin',email: 'admin@commonfloor.com',password: "password",admin: true)
+User.create(username: 'admin', email: 'admin@commonfloor.com', password: "password", admin: true)
 
-User.create(username: 'shiva',email: 'shiva@email.com',password: "password")
-User.create(username: 'raja',email: 'raja@email.com',password: "password")
-User.create(username: 'rahul',email: 'rahul@email.com',password: "password")
+User.create(username: 'shiva', email: 'shiva@email.com', password: "password")
+User.create(username: 'raja', email: 'raja@email.com', password: "password")
+User.create(username: 'rahul', email: 'rahul@email.com', password: "password")
 
-Categories.create(name: 'Apartment')
-Categories.create(name: 'House')
-Categories.create(name: 'Villa')
+Category.create(name: 'Apartment')
+Category.create(name: 'House')
+Category.create(name: 'Villa')
 
 3.times do |i|
   property = Property.new

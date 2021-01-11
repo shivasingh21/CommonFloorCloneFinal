@@ -1,44 +1,52 @@
 class Admin::CategoriesController < ApplicationController
+
   before_action :authenticate_admin
+
   def index
     @category = Category.all
   end
+
   def new
     @category = Category.new
   end
+
   def edit
-    @category = Category.find(params[:id])
+    @category = Category.find( params[:id] )
   end
+
   def create
-    @category = Category.new(category_params)
+    @category = Category.new( category_params )
     if @category.save
-      flash[:notice] = "Category is Add Successfully"
+      flash[:notice] = " Category is Add Successfully "
       redirect_to admin_categories_path
     else
-      render 'new'
+      render "new"
     end
   end
+
   def update
-    @category = Category.find(params[:id])
-    if @category.update(category_params)
-      flash[:notice] = "Category is Updated Successfully"
+    @category = Category.find( params[:id] )
+    if @category.update( category_params )
+      flash[:notice] = " Category is Updated Successfully "
 
       redirect_to admin_categories_path
     else
-      render 'edit'
+      render "edit"
     end
   end
+
   def destroy
-    @category = Category.find(params[:id])
+    @category = Category.find( params[:id] )
     @category.destroy
-    flash[:danger] = "Category is Deleted"
+    flash[:danger] = " Category is Deleted "
 
     redirect_to admin_categories_path
   end
-  private
-  def category_params
-    params.require(:category).permit(:name)
-  end
 
+  private
+
+  def category_params
+    params.require( :category ).permit( :name )
+  end
 
 end
