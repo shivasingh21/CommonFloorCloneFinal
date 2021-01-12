@@ -56,16 +56,20 @@
   <div class = "field">
     <label> <%= form.label :contact_person, "Contact Person" %></label>
     <div class = "fields">
+
       <div class = "twelve wide field">
-         <%= form.text_field :contact_person,placeholder: "Contact Person", class: "border border-success", :required => true %>
+         <%= form.text_field :contact_person, placeholder: "Contact Person", class: "border border-success", :required => true %>
       </div>
     </div>
   </div>
   <div class = "field">
     <label> <%= form.label :phone_number, "Contact Number" %></label>
     <div class = "fields">
-      <div class = "twelve wide field">
-        <%= form.text_field :phone_number,placeholder: "Number without 0 or +91 (eg. 89xxxxxxxx )", class: "border border-success", :required => true %>
+      <div class = "two wide field bg-success text-right text-white p-2">
+        +91
+      </div>
+      <div class = "ten wide field">
+        <%= form.text_field :phone_number, placeholder: "Number without 0 or +91 (eg. 89xxxxxxxx )", class: "border border-success", :required => true %>
       </div>
     </div>
   </div>

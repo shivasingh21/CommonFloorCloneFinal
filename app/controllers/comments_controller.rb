@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to property_path( @property )
     else
-      flash[:danger] = " Errors:- Rating should be between 0 to 5 OR/AND Rating/Comment field is empty "
+      flash[:danger] = " Errors:- Rating should be between 0 to 5 OR Rating/Comment field is empty "
       redirect_to property_path( @property )
     end
   end

@@ -16,9 +16,11 @@
     <i class = "right chevron icon"></i>
   </div>
 <% end %>
+
 <hr>
+<h1>Your Properties </h1>
+
 <% unless current_user.properties.empty? %>
-  <h1>Your Properties </h1>
   <div class = "ui divided items">
     <% current_user.properties.each do |property| %>
       <div class = "item">

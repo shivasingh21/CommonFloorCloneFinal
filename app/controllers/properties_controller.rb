@@ -1,7 +1,8 @@
 class PropertiesController < ApplicationController
 
   before_action :set_property, only: [ :show, :edit, :update, :destroy ]
-  before_action :authenticate_user, only: [ :new, :edit, :destroy ]
+  before_action :authenticate_user, except: [ :index ]
+  # before_action :authenticate_admin, only: [ :new, :edit, :destroy ]
   after_action :set_stop_mailer_flag, only: [ :show ]
 
   def index

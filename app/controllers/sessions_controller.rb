@@ -1,6 +1,10 @@
 class SessionsController < ApplicationController
 
   def new
+    return unless logged_in?
+
+    flash[:warning] = "You have already logged in."
+    redirect_to root_path
   end
 
   def create

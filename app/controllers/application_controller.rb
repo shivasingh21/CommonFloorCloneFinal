@@ -25,10 +25,19 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user
-    return if logged_in?
+    if logged_in?
+      if @user.nil?
+        return
+      else
+        return if current_user.id == @user.id
+      end
 
-    flash[:danger] = " Please login with your credential. "
-    redirect_to login_path
+      flash[:danger] = " Access denied. You don't have access. "
+      redirect_to root_path
+    else
+      flash[:danger] = " Please login with your credential to perform futher actions. "
+      redirect_to login_path
+    end
   end
 
   def authenticate_admin
