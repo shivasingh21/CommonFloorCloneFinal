@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     member do
       get :approve
       get :change_property_status
+      get :property_sell_rent_request
     end
     post 'comments', to: 'comments#create'
   end

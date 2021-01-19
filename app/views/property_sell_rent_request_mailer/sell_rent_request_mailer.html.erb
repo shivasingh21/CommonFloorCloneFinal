@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hello </h1>
+    <p>
+      <%= @current_user.username %> with email:-<%= @current_user.email %>
+      wanted to buy/rent property with details:-
+      <table class = "table">
+        <tr>
+          <th scope = "col">Username</th>
+          <td scope = "row"><%= @property.user.username %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Username Email</th>
+          <td scope = "row"><%= @property.user.email %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Property Type</th>
+          <td scope = "row"><%= @property.property_type %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Property Status</th>
+          <td scope = "row"><%= @property.property_status %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Address</th>
+          <td scope = "row"><%= @property.address %></td>
+        </tr>
+        <tr>
+          <th scope = "col">City</th>
+          <td scope = "row"><%= @property.city %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Price</th>
+          <td scope = "row"><%= @property.price %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Area</th>
+          <td scope = "row"><%= @property.area %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Owner Name</th>
+          <td scope = "row"><%= @property.owner_name %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Contact person</th>
+          <td scope = "row"><%= @property.contact_person %></td>
+        </tr>
+        <tr>
+          <th scope = "col">Phone Number</th>
+          <td scope = "row"><%= @property.phone_number %></td>
+        </tr>
+
+      </table>
+    </p>
+  </body>
+</html>

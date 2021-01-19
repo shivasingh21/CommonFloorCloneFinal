@@ -56,6 +56,13 @@ class PropertiesController < ApplicationController
     end
   end
 
+  def property_sell_rent_request
+    # byebug
+    @property = Property.find( params[:id] )
+    PropertySellRentRequestMailer.sell_rent_request_mailer( current_user,@property ).deliver
+    flash[:notice] = "Request mail to Buy/Rent has been send to Admin "
+    redirect_to property_path(params[:id])
+  end
   def show
     # $stop_mailer_flag variable is defined so that when show page is reloaded when comment or favorite action is performed in that case
     # again mail is not send.
