@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require social-share-button
+ *= require select2
  */
 @import "/*";
 @import "bootstrap";
@@ -22,6 +23,7 @@
 #favorite_link {
   color: white;
 }
+
 
 .flickr_pagination {
   text-align: center;

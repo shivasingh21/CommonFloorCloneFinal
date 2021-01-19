@@ -18,10 +18,13 @@ class Property < ApplicationRecord
   validates :property_type, presence: true
   validates :property_image, attached: true,content_type: [ "image/png", "image/jpg", "image/jpeg" ]
 
+  scope :top_picks, -> { where(approved_status: true).first(3) }
+  scope :users_property_list, -> (params) { property_search( params, admin = false ).paginate( page: params[:page], per_page: 6 ) }
+  scope :admin_property_list, -> (params) { property_search( params, admin = true ).paginate( page: params[:page], per_page: 5) }
 
   def self.property_search( search_params, admin )
     if admin
-      property = Property.where( approved_status: "false").order("created_at DESC")
+      property = Property.where( approved_status: search_params[ :approved_status ] ) if search_params[ :approved_status ].present?
     else
       property = Property.where( approved_status: "true").order("created_at DESC")
     end
@@ -32,10 +35,5 @@ class Property < ApplicationRecord
     return property
   end
 
-  scope :top_picks, -> { where(approved_status: true).first(3) }
-  scope :most_recent, -> { where(approved_status: true).last(3) }
-
-  scope :users_property_list, -> (params) { property_search( params, admin = false ).paginate( page: params[:page], per_page: 6 ) }
-  scope :admin_property_list, -> (params) { property_search( params, admin = true ).paginate( page: params[:page], per_page: 5) }
 
 end

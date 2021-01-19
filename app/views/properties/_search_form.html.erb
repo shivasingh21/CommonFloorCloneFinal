@@ -1,0 +1,14 @@
+
+<% if admin? %>
+  <%= select_tag "approved_status", options_for_select([["Not Approved",false],["Approved ",true]]), class: "btn btn-success dropdown-toggle m-2",id: "search-text" %>
+<% end %>
+  <span>Property Type:</span>
+  <%= select_tag "property_type", options_from_collection_for_select(@category, "name", "name"),include_blank: @search_field_text_property_type, class: "btn btn-success dropdown-toggle m-2",id: "search-text" %>
+
+  <span> Property Status:</span>
+  <%= select_tag "property_status", options_for_select(property_status_list), include_blank: @search_field_text_property_status , class: "btn btn-success dropdown-toggle m-2" %>
+
+  <span> City:</span>
+  <%= select_tag "city",  options_from_collection_for_select(city_selection, "city", "city"), include_blank: @search_field_text_city, class: "btn btn-success dropdown-toggle m-2" %>
+
+  <%= submit_tag "search" , class: "btn btn-success " %>

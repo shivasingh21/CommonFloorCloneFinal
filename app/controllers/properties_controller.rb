@@ -2,16 +2,20 @@ class PropertiesController < ApplicationController
 
   before_action :set_property, only: [ :show, :edit, :update, :destroy ]
   before_action :authenticate_user, except: [ :index ]
-  # before_action :authenticate_admin, only: [ :new, :edit, :destroy ]
   after_action :set_stop_mailer_flag, only: [ :show ]
+
 
   def index
     @category = Category.all
+
     if admin?
+      # byebug
       @property = Property.admin_property_list(params)
     else
       @property = Property.users_property_list(params)
     end
+    search_field_text(params)
+
   end
 
   def new
@@ -23,6 +27,32 @@ class PropertiesController < ApplicationController
     if @property.update( approved_status: "true" )
       flash[:notice] = " New property approved "
       redirect_to properties_path
+    end
+  end
+
+  # def change_property_status
+  #   @property = Property.find( params[:id] )
+  #   if @property.property_status == "Sell"
+  #     if @property.update( property_status: "Sold" )
+  #       flash[:notice] = " New property status approved "
+  #       redirect_to property_path(params[:id])
+  #      end
+  #   elsif @property.property_status == "Rental"
+  #     if @property.update( property_status: "Rented" )
+  #       flash[:notice] = " New property status approved "
+  #       redirect_to property_path(params[:id])
+  #     end
+  #   end
+  # end
+
+  def change_property_status
+    @property = Property.find( params[:id] )
+    if @property.property_status == "Sell" && @property.update( property_status: "Sold" )
+        flash[:notice] = " New property status changed to #{ @property.property_status } "
+        redirect_to property_path(params[:id])
+    elsif @property.property_status == "Rental" && @property.update( property_status: "Rented" )
+        flash[:notice] = " New property status changed to #{ @property.property_status } "
+        redirect_to property_path(params[:id])
     end
   end
 

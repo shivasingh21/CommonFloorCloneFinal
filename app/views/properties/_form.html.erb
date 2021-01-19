@@ -4,11 +4,11 @@
   <div class = "two fields">
     <div class = "field">
       <%= form.label :property_type, "Property Type" %>
-      <%= form.select :property_type, options_from_collection_for_select(Category.all, :name, :name, form.object.property_type), :prompt => "Property Type",class: "ui fluid dropdown" %>
+      <%= form.select :property_type, options_from_collection_for_select(Category.all, :name, :name, form.object.property_type), { prompt: "Property Type" }, { required: true, class: "border border-success ui fluid dropdown" } %>
     </div>
     <div class = "field">
       <%= form.label :property_status, "Property Status" %>
-      <%= form.select :property_status, [ "Rental", "Sold", "Sale" ], :prompt => "Property Status", class: "ui fluid dropdown", :required => true %>
+      <%= form.select :property_status, property_status_list, { prompt: "Property Status" }, { required: true, class: "border border-success ui fluid dropdown" } %>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
     <label> <%= form.label :address, "Address" %></label>
     <div class = "fields">
       <div class = "twelve wide field">
-         <%= form.text_field :address, placeholder: "Address", class: "border border-success", :required => true %>
+         <%= form.text_field :address, placeholder: "Address", class: "border border-success", required: true %>
       </div>
     </div>
   </div>
@@ -49,14 +49,13 @@
     <label> <%= form.label :area, "Area (in sqft)" %></label>
     <div class = "fields">
       <div class = "twelve wide field">
-        <%= form.text_field :area, placeholder: "Area in sqft", class: "border border-success", :required => true %>
+        <%= form.number_field :area, placeholder: "Area in sqft", class: "border border-success", :required => true %>
       </div>
     </div>
   </div>
   <div class = "field">
     <label> <%= form.label :contact_person, "Contact Person" %></label>
     <div class = "fields">
-
       <div class = "twelve wide field">
          <%= form.text_field :contact_person, placeholder: "Contact Person", class: "border border-success", :required => true %>
       </div>
@@ -65,7 +64,7 @@
   <div class = "field">
     <label> <%= form.label :phone_number, "Contact Number" %></label>
     <div class = "fields">
-      <div class = "two wide field bg-success text-right text-white p-2">
+      <div class = "two wide field bg-success text-right text-white p-2 ml-2">
         +91
       </div>
       <div class = "ten wide field">
@@ -75,9 +74,11 @@
   </div>
   <div class = "field">
     <label><%= form.label :property_image, "Property Image" %></label>
-    <%= form.file_field :property_image, class: "border border-success ui button", :required => true %>
+    <%= form.file_field :property_image, class: "border border-success ui button", id: "property_image_style" %>
   </div>
-
-  <%= form.submit @property.new_record? ? "SAVE" : "UPDATE", class: "ui green button"%>
+  <% if @property.property_image.attached? %>
+    <%= image_tag(@property.property_image, style:"width:100%", height: 400,class: "card-img-top", alt: "No Image")%>
+  <% end %>
+  <%= form.submit @property.new_record? ? "SAVE" : "UPDATE", class: "ui green button m-2"%>
 
 <% end %>

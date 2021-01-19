@@ -12,20 +12,15 @@ Rails.application.routes.draw do
   resources :properties do
     member do
       get :approve
+      get :change_property_status
     end
     post 'comments', to: 'comments#create'
-   # collection do
-   #   patch 'approve'
-   # end
-   # resources :reviews
   end
+
   get 'favorites/update'
 
   namespace :admin do
     resources :categories, except: [:show]
   end
-  # resources :categories, except: [:show]
 
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

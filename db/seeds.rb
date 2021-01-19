@@ -23,7 +23,7 @@ Category.create(name: 'Villa')
 3.times do |i|
   property = Property.new
   property.property_type = "Apartment"
-  property.property_status = "Rental"
+  property.property_status = "Rent"
   property.address = Faker::Address.full_address
   property.city = "Kolkata"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
@@ -39,7 +39,7 @@ end
 3.times do |i|
   property = Property.new
   property.property_type = "Apartment"
-  property.property_status = "Sold"
+  property.property_status = "Rent"
   property.address = Faker::Address.full_address
   property.city = "Bhopal"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
@@ -54,7 +54,7 @@ end
 3.times do |i|
   property = Property.new
   property.property_type = "Villa"
-  property.property_status = "Sold"
+  property.property_status = "Sell"
   property.address = Faker::Address.full_address
   property.city = "Siliguri"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
@@ -86,7 +86,7 @@ end
 3.times do |i|
   property = Property.new
   property.property_type = "House"
-  property.property_status = "Rental"
+  property.property_status = "Rent"
   property.address = Faker::Address.full_address
   property.city = "Ujjain"
   property.price = Faker::Number.between(from: 10000, to: 10000000)
@@ -101,7 +101,7 @@ end
 3.times do |i|
   property = Property.new
   property.property_type = "House"
-  property.property_status = "Rental"
+  property.property_status = "Sell"
   property.address = Faker::Address.full_address
   property.city = "Pune"
   property.price = Faker::Number.between(from: 10000, to: 10000000)

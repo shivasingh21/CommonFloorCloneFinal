@@ -74,31 +74,9 @@
 </div>
 <h1 class = " text-center ">Recently Added Products</h1>
 
-<div class = "ui divided items " >
-<% @property_most_recent.each do |property| %>
-  <div class = " item ">
-    <div class = "image ">
-      <% if property.property_image.attached? %>
-        <%= image_tag(property.property_image)%>
-      <% end %>
-    </div>
-    <div class = " content ">
-      <%= link_to property.property_type, property, class: " header " %>
-      <div class = " meta ">
-        <span class = " home ">By <%= property.owner_name %></span><br/>
-        <span class = " home " >Posted <%= time_ago_in_words(property.created_at) %></span>
-      </div>
-      <div class = " description ">
-        <p></p>
-      </div>
-      <div class = " extra ">
-        <div class = " ui label "><i class = " home icon "></i><%= property.property_status%></div>
-        <span class = " home text-dark "><i class =" rupee sign icon green "></i><%= property.price%></span>
-        <div class = " ui right floated primary button ">
-          <%= link_to "Show Details", property ,class: "text-white"%>
-          <i class = " right chevron icon "></i>
-        </div>
-      </div>
-    </div>
-  </div>
+<hr>
+<h4>Search By</h4>
+<%= form_tag(root_path, method: "get") do  %>
+  <%= render "properties/search_form" %>
 <% end %>
+<%= render "properties/property_list" %>

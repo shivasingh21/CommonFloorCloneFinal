@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :current_user, :logged_in?, :admin?, :favorite_text, :favorite_text_conformation, :redis_add_user_string, :redis_user_count_string
+  helper_method :current_user, :logged_in?, :admin?, :favorite_text, :favorite_text_conformation, :redis_add_user_string, :redis_user_count_string, :property_status_list, :check_status, :change_buy_rent_text, :change_property_status_text
 
   def current_user
     @current_user ||= User.find( session[:user_id] ) if session[:user_id]
@@ -58,6 +58,48 @@ class ApplicationController < ActionController::Base
 
   def redis_user_count_string( user )
     return " #{ user.id } ( #{ user.username } ) "
+  end
+
+  def property_status_list
+    return [ "Rental", "Rented" , "Sold", "Sell" ]
+  end
+
+  def search_field_text( search_params )
+    if search_params[ :property_type ].present?
+      @search_field_text_property_type = search_params[ :property_type ]# search_params[ :property_type ]
+    else
+      @search_field_text_property_type = "None"
+    end
+    if search_params[ :property_status ].present?
+      @search_field_text_property_status = search_params[ :property_status ]
+    else
+      @search_field_text_property_status = "None"
+    end
+    if search_params[ :city ].present?
+      @search_field_text_city = search_params[ :city ]
+    else
+      @search_field_text_city = "None"
+    end
+  end
+
+  def check_status(property_status)
+    return true if ( property_status == "Rental" || property_status == "Sell" )
+  end
+
+  def change_buy_rent_text(property_status)
+    if property_status == "Sell"
+      return "Buy"
+    elsif property_status == "Rental"
+      return "Rent"
+    end
+  end
+
+  def change_property_status_text(property_status)
+    if property_status == "Sell"
+      return "Sold"
+    elsif property_status == "Rental"
+      return "Rented"
+    end
   end
 
 end

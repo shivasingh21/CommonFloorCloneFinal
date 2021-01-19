@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [ :show, :edit, :update ]
-  before_action :authenticate_user
+  before_action :authenticate_user, except: [:new]
 
   def new
     if logged_in?
@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       redirect_to root_path
       return
     end
-    
+
     @user = User.new
   end
 

@@ -62,8 +62,27 @@
       <%= link_to "Delete Property", property_path(@property), method: :delete, data: { confirm: "Are you sure?" }, class: "text-white" %>
       <i class = "pl-1 check icon"></i>
     </div>
+    <hr>
+  <% end %>
+  <% if check_status(@property.property_status) && ( current_user.id != @property.user.id )  %>
+    <% if admin? %>
+      <h3>Change Property Status</h3>
+      <div class = "ui primary button">
+        <%= link_to " #{ change_property_status_text(@property.property_status) } ", change_property_status_property_path(@property), data: { confirm: "Are you sure?" }, class: "text-white" %>
+        <i class = "pl-1 check icon"></i>
+      </div>
+    <% else %>
+      <h3>Apply for <%= change_buy_rent_text(@property.property_status) %></h3>
+      <div class = "ui primary button">
+        <%= link_to " #{ change_buy_rent_text(@property.property_status) } ", property_path(@property), data: { confirm: "Are you sure?" }, class: "text-white" %>
+        <i class = "pl-1 check icon"></i>
+      </div>
+      <hr>
+    <% end %>
+
   <% end %>
 <% end %>
+
 
 <% if admin? && !@property.approved_status %>
   <hr>
@@ -72,45 +91,47 @@
     <i class = "pl-1 check icon"></i>
   </div>
 <% end %>
-
-<% if logged_in? %>
-  <hr>
-  <div class = "ui primary button ">
-    <%= link_to favorite_text, favorites_update_path(property: @property), id: 'favorite_link', data: { confirm: "Are you sure you want to #{favorite_text_conformation} favorite list?" }%>
-    <i class = "pl-1 heart icon"></i>
-  </div>
-  <br>
-  Share Property Details:<%= social_share_button_tag(@property.property_type) %>
-  <hr>
-<% end %>
-
-<% if current_user.id != @property.user.id %>
-  <% $redis.sadd redis_add_user_string(@property), redis_user_count_string(current_user) %>
-<% end %>
-
 <h3> View Count: <%= $redis.scard redis_add_user_string(@property) %></h3>
-
 <hr>
+<% if @property.approved_status? %>
+  <% if logged_in? %>
+    <% if current_user.id != @property.user.id %>
+      <div class = "ui primary button ">
+        <%= link_to favorite_text, favorites_update_path(property: @property), id: 'favorite_link', data: { confirm: "Are you sure you want to #{favorite_text_conformation} favorite list?" }%>
+        <i class = "pl-1 heart icon"></i>
+      </div>
+      <br>
+    <% end %>
+    Share Property Details:<%= social_share_button_tag(@property.property_type) %>
+    <hr>
+  <% end %>
 
-<% if logged_in? %>
-  <%= form_with model: [@property, @comment] do |form| %>
-    <div class = "two fields">
-      <div class = "field">
-        <%= form.label :rating, "Rating" %>
-        <%= form.text_field :rating, placeholder: " Rating between 0 to 5", class: "border border-success" %>
+  <% if current_user.id != @property.user.id %>
+    <% $redis.sadd redis_add_user_string(@property), redis_user_count_string(current_user) %>
+  <% end %>
+
+  <% if logged_in? && ( current_user.id != @property.user.id ) %>
+  <h3 class = "ui dividing header">Add Comment
+  </h3>
+    <%= form_with model: [@property, @comment] do |form| %>
+      <div class = "two fields">
+        <div class = "field">
+          <%= form.label :rating, "Rating" %>
+          <%= form.text_field :rating, placeholder: " Rating between 0 to 5", class: "border border-success" %>
+        </div>
+        <div class = "field">
+          <%= form.label :comment, "Comment" %>
+          <%= form.text_field :comment, placeholder: " Comment", class: "border border-success" %>
+        </div>
       </div>
-      <div class = "field">
-        <%= form.label :comment, "Comment" %>
-        <%= form.text_field :comment, placeholder: " Comment", class: "border border-success" %>
-      </div>
-    </div>
-    <%= form.submit "Comment", class: "ui green button"%>
+      <%= form.submit "Comment", class: "ui green button"%>
+    <% end %>
   <% end %>
 <% end %>
 
+<h3 class = "ui dividing header">Comments</h3>
 <% if @comments.present? %>
   <div class = "ui threaded comments pb-3">
-    <h3 class = "ui dividing header">Comments</h3>
     <% @comments.each do |comment|%>
       <div class = "comment">
         <div class = "content">
@@ -127,7 +148,6 @@
         </div>
       </div>
     <% end %>
-
   </div>
 <% else %>
   <p>No Comments</p>

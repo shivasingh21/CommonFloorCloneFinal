@@ -20,3 +20,4 @@
 //= require bootstrap
 //= require semantic-ui
 //= require social-share-button
+//= require select2
