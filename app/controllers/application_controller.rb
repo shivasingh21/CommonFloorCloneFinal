@@ -81,13 +81,9 @@ class ApplicationController < ActionController::Base
       @search_field_text_city = "None"
     end
     if search_params[ :approved_status ].present?
-      if search_params[ :approved_status ] == true
-        @search_field_text_approved_status = "Approved"
-      else
-        @search_field_text_approved_status = "Not Approved"
-      end
+      @search_field_text_approved_status = search_params[ :approved_status ]
     else
-      @search_field_text_approved_status = "None"
+      @search_field_text_approved_status = "None1"
     end
     if search_params[ :email ].present?
       @search_field_text_email = search_params[ :email ]

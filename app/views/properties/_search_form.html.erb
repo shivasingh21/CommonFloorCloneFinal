@@ -1,18 +1,18 @@
 
 <% if admin? %>
   <span>Approved Status:</span>
-  <%= select_tag "approved_status", options_for_select([["Not Approved",false],["Approved ",true]]),id: "search-text", prompt: @search_field_text_approved_status, include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
+  <%= select_tag "approved_status", options_for_select([["False",false],["True",true]],@search_field_text_approved_status), include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
   <span>User Email:</span>
-  <%= select_tag "email", options_from_collection_for_select( @user, "email", "email"),id: "search-text", prompt: @search_field_text_email, include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
+  <%= select_tag "email", options_from_collection_for_select( @user, "email", "email",@search_field_text_email), include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
   <br>
 <% end %>
   <span>Property Type:</span>
-  <%= select_tag "property_type", options_from_collection_for_select( @category, "name", "name"),id: "search-text", prompt: @search_field_text_property_type, include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
+  <%= select_tag "property_type", options_from_collection_for_select( @category, "name", "name",@search_field_text_property_type), include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
 
   <span> Property Status:</span>
-  <%= select_tag "property_status", options_for_select(property_status_list),id: "search-text", prompt: @search_field_text_property_status, include_blank: "None" , class: "btn btn-success dropdown-toggle m-2" %>
+  <%= select_tag "property_status", options_for_select(property_status_list,@search_field_text_property_status), include_blank: "None" , class: "btn btn-success dropdown-toggle m-2" %>
 
   <span> City:</span>
-  <%= select_tag "city",  options_from_collection_for_select(city_selection, "city", "city"),id: "search-text" , prompt: @search_field_text_city, include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
+  <%= select_tag "city",  options_from_collection_for_select(city_selection, "city", "city",@search_field_text_city), include_blank: "None", class: "btn btn-success dropdown-toggle m-2" %>
 
   <%= submit_tag "SEARCH" , class: "btn btn-success px-3" %>
