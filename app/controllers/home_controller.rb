@@ -15,6 +15,4 @@ class HomeController < ApplicationController
     search_field_text(params)
   end
 
-
-
 end

@@ -39,7 +39,7 @@ class PropertiesController < ApplicationController
   def property_sell_rent_request
     PropertySellRentRequestMailer.sell_rent_request_mailer( current_user,@property ).deliver
     flash[:notice] = "Request mail to Buy/Rent has been send to Admin "
-    redirect_to property_path(params[:id])
+    redirect_to property_path( params[:id] )
   end
 
   def show

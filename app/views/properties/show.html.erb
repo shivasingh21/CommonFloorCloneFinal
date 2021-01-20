@@ -72,12 +72,14 @@
         <i class = "pl-1 check icon"></i>
       </div>
     <% else %>
-      <h3>Apply for <%= change_buy_rent_text(@property.property_status) %></h3>
-      <div class = "ui primary button">
-        <%= link_to " #{ change_buy_rent_text(@property.property_status) } ", property_sell_rent_request_property_path(@property), data: { confirm: "Are you sure?" }, class: "text-white" %>
-        <i class = "pl-1 check icon"></i>
-      </div>
-      <hr>
+      <% if @property.approved_status? %>
+        <h3>Apply for <%= change_buy_rent_text(@property.property_status) %></h3>
+        <div class = "ui primary button">
+          <%= link_to " #{ change_buy_rent_text(@property.property_status) } ", property_sell_rent_request_property_path(@property), data: { confirm: "Are you sure?" }, class: "text-white" %>
+          <i class = "pl-1 check icon"></i>
+        </div>
+        <hr>
+      <% end %>
     <% end %>
 
   <% end %>
