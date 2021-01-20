@@ -66,7 +66,7 @@ class ApplicationController < ActionController::Base
 
   def search_field_text( search_params )
     if search_params[ :property_type ].present?
-      @search_field_text_property_type = search_params[ :property_type ]# search_params[ :property_type ]
+      @search_field_text_property_type = search_params[ :property_type ]
     else
       @search_field_text_property_type = "None"
     end
@@ -79,6 +79,20 @@ class ApplicationController < ActionController::Base
       @search_field_text_city = search_params[ :city ]
     else
       @search_field_text_city = "None"
+    end
+    if search_params[ :approved_status ].present?
+      if search_params[ :approved_status ] == true
+        @search_field_text_approved_status = "Approved"
+      else
+        @search_field_text_approved_status = "Not Approved"
+      end
+    else
+      @search_field_text_approved_status = "None"
+    end
+    if search_params[ :email ].present?
+      @search_field_text_email = search_params[ :email ]
+    else
+      @search_field_text_email = "None"
     end
   end
 

@@ -1,15 +1,14 @@
 class PropertiesController < ApplicationController
 
-  before_action :set_property, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_property, only: [ :show, :edit, :update, :destroy, :approve, :change_property_status, :property_sell_rent_request ]
   before_action :authenticate_user, except: [ :index ]
   after_action :set_stop_mailer_flag, only: [ :show ]
 
 
   def index
     @category = Category.all
-
+    @user = User.all
     if admin?
-      # byebug
       @property = Property.admin_property_list(params)
     else
       @property = Property.users_property_list(params)
@@ -23,46 +22,26 @@ class PropertiesController < ApplicationController
   end
 
   def approve
-    @property = Property.find( params[:id] )
     if @property.update( approved_status: "true" )
       flash[:notice] = " New property approved "
       redirect_to properties_path
     end
   end
 
-  # def change_property_status
-  #   @property = Property.find( params[:id] )
-  #   if @property.property_status == "Sell"
-  #     if @property.update( property_status: "Sold" )
-  #       flash[:notice] = " New property status approved "
-  #       redirect_to property_path(params[:id])
-  #      end
-  #   elsif @property.property_status == "Rental"
-  #     if @property.update( property_status: "Rented" )
-  #       flash[:notice] = " New property status approved "
-  #       redirect_to property_path(params[:id])
-  #     end
-  #   end
-  # end
-
   def change_property_status
-    @property = Property.find( params[:id] )
     if @property.property_status == "Sell" && @property.update( property_status: "Sold" )
-        flash[:notice] = " New property status changed to #{ @property.property_status } "
-        redirect_to property_path(params[:id])
+      change_property_status_flash_message_and_redirect()
     elsif @property.property_status == "Rental" && @property.update( property_status: "Rented" )
-        flash[:notice] = " New property status changed to #{ @property.property_status } "
-        redirect_to property_path(params[:id])
+      change_property_status_flash_message_and_redirect()
     end
   end
 
   def property_sell_rent_request
-    # byebug
-    @property = Property.find( params[:id] )
     PropertySellRentRequestMailer.sell_rent_request_mailer( current_user,@property ).deliver
     flash[:notice] = "Request mail to Buy/Rent has been send to Admin "
     redirect_to property_path(params[:id])
   end
+
   def show
     # $stop_mailer_flag variable is defined so that when show page is reloaded when comment or favorite action is performed in that case
     # again mail is not send.
@@ -118,6 +97,11 @@ class PropertiesController < ApplicationController
 
     def set_stop_mailer_flag
       $stop_mailer_flag = true
+    end
+
+    def change_property_status_flash_message_and_redirect
+      flash[:notice] = " New property status changed to #{ @property.property_status } "
+      redirect_to property_path(params[:id])
     end
 
 end

@@ -25,7 +25,10 @@ class Property < ApplicationRecord
   def self.property_search( search_params, admin )
     if admin
       property = Property.order("created_at DESC")
-      property = Property.where( approved_status: search_params[ :approved_status ] ) if search_params[ :approved_status ].present?
+      property = property.where( approved_status: search_params[ :approved_status ] ) if search_params[ :approved_status ].present?
+      user = User.where( email: search_params[ :email ] ) if search_params[ :email ].present?
+      property = property.where(user: user)
+
     else
       property = Property.where( approved_status: "true").order("created_at DESC")
     end

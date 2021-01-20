@@ -6,7 +6,7 @@ class HomeController < ApplicationController
     @users_count = User.users_count
 
     @category = Category.all
-
+    @user = User.all
     if admin?
       @property = Property.admin_property_list(params)
     else
