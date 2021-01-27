@@ -37,8 +37,15 @@ class PropertiesController < ApplicationController
   end
 
   def property_sell_rent_request
-    PropertySellRentRequestMailer.sell_rent_request_mailer( current_user,@property ).deliver
-    flash[:notice] = "Request mail to Buy/Rent has been send to Admin "
+    property_purchase_detail = PropertyPurchaseDetail.where( property: @property, user: current_user )
+    if property_purchase_detail == []
+      PropertyPurchaseDetail.create( property: @property, user: current_user )
+      PropertySellRentRequestMailer.sell_rent_request_mailer( current_user,@property ).deliver
+      flash[:notice] = "Request mail to Buy/Rent property has been send to Admin "
+    else
+      flash[:notice] = "You have already requested to Buy/Rent this property"
+    end
+
     redirect_to property_path( params[:id] )
   end
 
@@ -54,6 +61,8 @@ class PropertiesController < ApplicationController
     @comments = @property.comments.order( "created_at DESC" )
 
     @favorite_exists = Favorite.where( property: @property,user: current_user ) == [] ? false : true
+
+    @property_purchase_detail = PropertyPurchaseDetail.where( property: @property )
   end
 
   def edit

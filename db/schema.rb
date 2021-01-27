@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_11_203519) do
+ActiveRecord::Schema.define(version: 2021_01_27_115742) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,16 @@ ActiveRecord::Schema.define(version: 2021_01_11_203519) do
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
+  create_table "property_purchase_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "property_id", null: false
+    t.bigint "user_id", null: false
+    t.boolean "property_bought_sold_status", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id"], name: "index_property_purchase_details_on_property_id"
+    t.index ["user_id"], name: "index_property_purchase_details_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "provider"
     t.string "uid"
@@ -93,4 +103,6 @@ ActiveRecord::Schema.define(version: 2021_01_11_203519) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "users"
   add_foreign_key "properties", "users"
+  add_foreign_key "property_purchase_details", "properties"
+  add_foreign_key "property_purchase_details", "users"
 end
