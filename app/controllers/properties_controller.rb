@@ -29,11 +29,12 @@ class PropertiesController < ApplicationController
   end
 
   def change_property_status
-    if @property.property_status == "Sell" && @property.update( property_status: "Sold" )
+    if @property.property_status == "Sell" && @property.update( property_status: "Sold", property_sold_rented_to: params[:customer])
       change_property_status_flash_message_and_redirect()
-    elsif @property.property_status == "Rental" && @property.update( property_status: "Rented" )
+    elsif @property.property_status == "Rental" && @property.update( property_status: "Rented", property_sold_rented_to: params[:customer] )
       change_property_status_flash_message_and_redirect()
     end
+
   end
 
   def property_sell_rent_request

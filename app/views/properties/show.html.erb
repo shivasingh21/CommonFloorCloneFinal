@@ -51,7 +51,9 @@
     </table>
   </div>
 </div>
-
+<% unless @property.property_sold_rented_to == "None" %>
+  <h3>The Property is <span class=" text-success "><%= @property.property_status %></span> to <span class=" text-success "> <%= @property.property_sold_rented_to %></span></h3>
+<% end %>
 <% if logged_in? %>
   <% if current_user.id == @property.user.id %>
     <div class = "ui primary button">
@@ -70,9 +72,9 @@
       <ul class="list-group">
         <% @property_purchase_detail.each do |property_purchase_detail| %>
           <li class="list-group-item d-flex justify-content-between align-items-center w-50">
-            <%= property_purchase_detail.user.username %> ( <%= property_purchase_detail.user.email %> )
+            <%= property_purchase_detail.user.id %>:- <%= property_purchase_detail.user.username %> ( <%= property_purchase_detail.user.email %> )
             <span class="badge badge-primary  badge-pill">
-              <%= link_to " #{ @property.property_status } ", change_property_status_property_path(@property), data: { confirm: "Are you sure?" }, class: "text-white h5 px-3 py-2" %>
+              <%= link_to " #{ @property.property_status } ", change_property_status_property_path(@property,customer: property_purchase_detail.user.username), data: { confirm: "Are you sure?" }, class: "text-white h5 px-3 py-2" %>
             </span>
           </li>
         <% end %>
