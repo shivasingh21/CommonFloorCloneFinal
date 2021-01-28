@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :set_user, only: [ :show, :edit, :update ]
-  before_action :authenticate_user, except: [:new]
+  before_action :authenticate_user, only: [ :show ]
 
   def new
     if logged_in?
@@ -17,6 +17,8 @@ class UsersController < ApplicationController
   end
 
   def show
+    @bought_rented_property = Property.where(sold_or_rent_to_user_id: current_user.id)
+    @sold_property = Property.where(property_status: "Sold",user: current_user)
   end
 
   def create

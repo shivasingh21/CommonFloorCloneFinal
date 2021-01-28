@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<% unless @property.sold_or_rent_to_user_id == "0" %>
+<% if @property.sold_or_rent_to_user_id != 0 %>
   <h3>The Property is <span class=" text-success "><%= @property.property_status %></span> to <span class=" text-success "> <%= check_current_owner(@property.sold_or_rent_to_user_id) %></span></h3>
 <% end %>
 
