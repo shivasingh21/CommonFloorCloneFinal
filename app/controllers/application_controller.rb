@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-  helper_method :current_user, :logged_in?, :admin?, :favorite_text, :favorite_text_conformation, :redis_add_user_string, :redis_user_count_string, :property_status_list, :check_status, :change_buy_rent_text, :change_property_status_text
+  helper_method :current_user, :logged_in?, :admin?, :favorite_text, :favorite_text_conformation, :redis_add_user_string, :redis_user_count_string, :property_status_list, :check_status, :change_buy_rent_text, :change_property_status_text, :check_current_owner
 
   def current_user
     @current_user ||= User.find( session[:user_id] ) if session[:user_id]
@@ -112,4 +112,8 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_current_owner(current_owner)
+    user = User.find(current_owner)
+    return user.username
+  end
 end
