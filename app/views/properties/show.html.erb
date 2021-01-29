@@ -75,7 +75,7 @@
         <% if @property_purchase_detail.present?  %>
           <% @property_purchase_detail.each do |property_purchase_detail| %>
             <li class="list-group-item d-flex justify-content-between align-items-center w-50">
-              <%= property_purchase_detail.user.id %>:- <%= property_purchase_detail.user.username %> ( <%= property_purchase_detail.user.email %> )
+              <%= property_purchase_detail.user.username %> ( <%= property_purchase_detail.user.email %> )
               <span class="badge badge-primary  badge-pill">
                 <%= link_to " #{ @property.property_status } ", change_property_status_property_path(@property,customer: property_purchase_detail.user.username,user: property_purchase_detail.user), data: { confirm: "Are you sure?" }, class: "text-white h5 px-3 py-2" %>
               </span>
@@ -144,28 +144,29 @@
       <%= form.submit "Comment", class: "ui green button"%>
     <% end %>
   <% end %>
-<% end %>
 
-<h3 class = "ui dividing header">Comments</h3>
-<% if @comments.present? %>
-  <div class = "ui threaded comments pb-3">
-    <% @comments.each do |comment|%>
-      <div class = "comment">
-        <div class = "content">
-          <a class = "author"><%= comment.user.username %></a>
-          <div class = "metadata">
-            <span class = "date"><%= comment.created_at.strftime("%I:%M %p") %> </span>
-          </div>
-          <div class = "text">
-            <p>Comment:- <%= comment.comment %></p>
-          </div>
-          <div class = "text">
-            <p>Rating:- <%= comment.rating %></p>
+
+  <h3 class = "ui dividing header">Comments</h3>
+  <% if @comments.present? %>
+    <div class = "ui threaded comments pb-3">
+      <% @comments.each do |comment|%>
+        <div class = "comment">
+          <div class = "content">
+            <a class = "author"><%= comment.user.username %></a>
+            <div class = "metadata">
+              <span class = "date"><%= comment.created_at.strftime("%I:%M %p") %> </span>
+            </div>
+            <div class = "text">
+              <p>Comment:- <%= comment.comment %></p>
+            </div>
+            <div class = "text">
+              <p>Rating:- <%= comment.rating %></p>
+            </div>
           </div>
         </div>
-      </div>
-    <% end %>
-  </div>
-<% else %>
-  <p>No Comments</p>
+      <% end %>
+    </div>
+  <% else %>
+    <p>No Comments</p>
+  <% end %>
 <% end %>

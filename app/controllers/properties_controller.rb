@@ -29,10 +29,9 @@ class PropertiesController < ApplicationController
   end
 
   def change_property_status
-    # byebug
     if @property.property_status == "Sell" && @property.update( property_status: "Sold",sold_or_rent_to_user_id: params[:user])
       change_property_status_flash_message_and_redirect()
-    elsif @property.property_status == "Rental" && @property.update( property_status: "Rented", property_sold_rented_to: params[:customer] )
+    elsif @property.property_status == "Rental" && @property.update( property_status: "Rented", sold_or_rent_to_user_id: params[:user] )
       change_property_status_flash_message_and_redirect()
     end
 

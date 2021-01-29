@@ -76,9 +76,7 @@
     <label><%= form.label :property_image, "Property Image" %></label>
     <%= form.file_field :property_image, class: "border border-success ui button", id: "property_image_style" %>
   </div>
-  <% if @property.property_image.attached? %>
-    <%= image_tag(@property.property_image, style:"width:100%", height: 400,class: "card-img-top", alt: "No Image")%>
-  <% end %>
+
   <%= form.submit @property.new_record? ? "SAVE" : "UPDATE", class: "ui green button m-2"%>
 
 <% end %>
