@@ -108,6 +108,10 @@
     <i class = "pl-1 check icon"></i>
   </div>
 <% end %>
+<% if current_user.id != @property.user.id %>
+  <% $redis.sadd redis_add_user_string(@property), redis_user_count_string(current_user, @property) %>
+<% end %>
+
 <h3> View Count: <%= $redis.scard redis_add_user_string(@property) %></h3>
 <hr>
 <% if @property.approved_status? %>
@@ -124,7 +128,7 @@
   <% end %>
 
   <% if current_user.id != @property.user.id %>
-    <% $redis.sadd redis_add_user_string(@property), redis_user_count_string(current_user) %>
+    <% $redis.sadd redis_add_user_string(@property), redis_user_count_string(current_user, @property) %>
   <% end %>
 
   <% if logged_in? && ( current_user.id != @property.user.id ) %>

@@ -4,6 +4,7 @@ class Property < ApplicationRecord
   has_one_attached :property_image
   has_many :comments, dependent: :destroy
   has_many :favorites,dependent: :destroy
+  has_many :property_purchase_details,dependent: :destroy
 
   before_validation { self.city = self.city.upcase }
 

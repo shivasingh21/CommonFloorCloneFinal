@@ -28,9 +28,15 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[ :user_id ] = nil
-    session[ :omniauth ] = nil
-    flash[ :notice ] = " Logged Out "
-    redirect_to root_path
+    if logged_in?
+      session[ :user_id ] = nil
+      session[ :omniauth ] = nil
+      flash[ :notice ] = " Logged Out "
+      redirect_to root_path
+    else
+      flash[ :notice ] = " You are not logged in "
+      redirect_to login_path
+    end
   end
+  
 end

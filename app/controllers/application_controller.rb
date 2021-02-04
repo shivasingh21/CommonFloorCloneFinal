@@ -53,11 +53,12 @@ class ApplicationController < ActionController::Base
   end
 
   def redis_add_user_string( property )
-    return " #{ property.user.id } ( #{ property.user.username } ) "
+    #here pid means property id
+    return " #{ property.user.id }-#{ property.user.username } ( pid - #{property.id} ) "
   end
 
-  def redis_user_count_string( user )
-    return " #{ user.id } ( #{ user.username } ) "
+  def redis_user_count_string( user, property )
+    return " #{ user.id }-#{ user.username } ( pid - #{property.id} ) "
   end
 
   def property_status_list
