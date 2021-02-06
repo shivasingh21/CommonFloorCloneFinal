@@ -16,7 +16,7 @@ User.create(username: "shiva", email: "shiva@email.com", password: "password")
 User.create(username: "raja", email: "raja@email.com", password: "password")
 User.create(username: "rahul", email: "rahul@email.com", password: "password")
 
-Category.create(name: "Apartmen"')
+Category.create(name: "Apartment")
 Category.create(name: "House")
 Category.create(name: "Villa")
 

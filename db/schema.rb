@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 2021_01_29_063508) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "sold_or_rent_to_user_id", default: 0, null: false
+    t.bigint "sold_or_rent_to_user_id"
     t.index ["sold_or_rent_to_user_id"], name: "index_properties_on_sold_or_rent_to_user_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 2021_01_29_063508) do
   add_foreign_key "favorites", "properties"
   add_foreign_key "favorites", "users"
   add_foreign_key "properties", "users"
+  add_foreign_key "properties", "users", column: "sold_or_rent_to_user_id"
   add_foreign_key "property_purchase_details", "properties"
   add_foreign_key "property_purchase_details", "users"
 end
