@@ -8,12 +8,13 @@ class User < ApplicationRecord
   has_many :favorites,dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :property_purchase_details,dependent: :destroy
-  
+
   before_validation { self.email = self.email.downcase }
 
   validates :username, presence: true, length: { maximum: 25 }, uniqueness: { case_sensetive: false }
-  validates :email, presence: true, length: { maximum: 30 }, uniqueness: { case_sensetive: false }, format: { with: VALID_EMAIL_REGEX }
-
+  validates :email, presence: true, length: { maximum: 40 }, uniqueness: { case_sensetive: false }, format: { with: VALID_EMAIL_REGEX }
+  validates :password,presence: true
+  
   scope :users_count, -> { where(admin: false ).count }
 
   def self.sign_in_from_omniauth( auth )
